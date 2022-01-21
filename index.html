@@ -117,13 +117,38 @@ h1, h2, h3, h4, h5, h6 {
             </div>
             <div class="flex flex-wrap flex-col w-100% items-left max-w-4xl mt-6 sm:w-full">
                 <h2 class="text-2xl text-left font-bold">Status</h2>
-                <aside>Last Updated: Jan 13th</aside>
+                <aside>Last Updated: Jan 21st</aside>
                 <h3 class="text-1xl text-left pt-2"><b><a href="https://github.com/filecoin-project/storetheindex/">Store The Index</a></b>: A network index node storing a mapping of CID to provider. Status: Testing at scale.</h3>
                 <h3 class="text-1xl text-left pt-2"><b><a href="https://github.com/filecoin-project/index-provider">Index Provider</a></b>: A library for providing advertising provided content over the indexer '<a href="https://github.com/filecoin-project/index-provider/blob/docs/design/docs/design.md">ingestion protocol</a>'. Status: Test instance running and validated. Integration into lotus markets validated on local storage provider. Next step: validation with larger set of storage providers.</h3>
                 <h3 class="text-1xl text-left pt-2"><b><a href="https://github.com/ipfs-shipyard/w3rc/">Retrieval Client</a></b>: A small client for retrieving content using a network indexer for content routing. Status: Manual success for individual graphsync retrievals against index provider instance.</h3>
                 <h3 class="text-1xl text-left pt-2"><b><a href="https://github.com/ipfs/go-delegated-routing">Delegated Routing</a></b>: A library for delegating content routing to an HTTP provider. Compatible with the store the index content routing API. Status: prototype for individual node testing.</h3>
                 <h3 class="text-1xl text-left pt-2"><b><a href="https://hackmd.io/Ebmp0NkeSsSkz1R4Fd6EwA">Content Router Discovery Protocol</a></b>: A design for how delegated routers are automatically discovered and distributed in an IPFS environment. Status: Proposal</h3>
             </div>
+        </div>
+        <div class="flex flex-wrap flex-col w-100% items-left max-w-4xl mt-6 sm:w-full">
+          <h2 class="text-2xl text-left font-bold">🗄 Weekly Update from Jan 21st</h2>
+          <ul>
+            <li>@Aarsh updated the dagstore to allow markets to behave more like IPFS in matching on multihash rather than full CID codecs
+            </li>
+            <li>
+              @gammazero cleaned up the provider restart flow and removal flow. This also better supports providers changing their addresses.
+            </li>
+            <li>
+              @Marco is much of the way through cleaning up issues with concurrent processing of advertisements
+            </li>
+            <li>We have an improved CD structure thanks to @Cory
+            </li>
+          </ul>
+<p>We also successfully were able to make retrieval requests against active filecoin storage providers this week using the w3r retrieval client 🎉
+On the non-technical front, there have been some great discussions on roadmapping this work. These sessions have included:</p>
+<ul>
+<li>Automatic discovery of content routers in IPFS</li>
+<li>Scaling and Decentralizing the store the index component</li>
+<li>Integrating store the index into filecoin-ipfs interop bridges</li>
+</ul>
+<p>
+  We should be increasing the amount of content in the index by another order of magnitude over the weekend, and then begin work on rolling it out to more storage providers next week to do the next level of scale testing 🚀
+</p>
         </div>
         <div class="flex flex-wrap items-center justify-around  max-w-4xl mt-6 sm:w-full">
           <div class="flex flex-wrap flex-col w-100% items-left max-w-4xl mt-6 sm:w-full">
