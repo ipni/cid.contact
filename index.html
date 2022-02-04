@@ -117,7 +117,7 @@ h1, h2, h3, h4, h5, h6 {
             </div>
             <div class="flex flex-wrap flex-col w-100% items-left max-w-4xl mt-6 sm:w-full">
                 <h2 class="text-2xl text-left font-bold">Status</h2>
-                <aside>Last Updated: Jan 28th</aside>
+                <aside>Last Updated: Feb 4th</aside>
                 <h3 class="text-1xl text-left pt-2"><b><a href="https://github.com/filecoin-project/storetheindex/">Store The Index</a></b>: A network index node storing a mapping of CID to provider. Status: Full ingestion of 1 provider. Working on resilience of syncs across restarts. More providers next week.</h3>
                 <h3 class="text-1xl text-left pt-2"><b><a href="https://github.com/filecoin-project/index-provider">Index Provider</a></b>: A library for providing advertising provided content over the indexer '<a href="https://github.com/filecoin-project/index-provider/blob/docs/design/docs/design.md">ingestion protocol</a>'. Status: Test instance running and validated. Integration into lotus markets validated on local storage provider. Next step: validation with larger set of storage providers.</h3>
                 <h3 class="text-1xl text-left pt-2"><b><a href="https://github.com/ipfs-shipyard/w3rc/">Retrieval Client</a></b>: A small client for retrieving content using a network indexer for content routing. Status: Manual success for individual graphsync retrievals against index provider instance.</h3>
@@ -126,23 +126,30 @@ h1, h2, h3, h4, h5, h6 {
             </div>
         </div>
         <div class="flex flex-wrap flex-col w-100% items-left max-w-4xl mt-6 sm:w-full">
-          <h2 class="text-2xl text-left font-bold">🗄 Weekly Update from Jan 28th</h2>
+          <h2 class="text-2xl text-left font-bold">🗄 Weekly Update from Feb 4th</h2>
           <ul>
             <li>
-              Huge thanks to the whole team, and @Aarsh and @Dirk for running through a dagstore migration on our test storage provider. This re-published indexes for all past deals on the machine, allowing us to test ingestion of ~3 million individual content CIDs.
+              We've recruited a group of storage providers for the next phase of testing, and expect to begin that next week. Final touches for the branch to test are landing <a href="https://github.com/filecoin-project/lotus/pull/7313">here</a> thanks to some final heroic rebasing action from @Aarsh
             </li>
             <li>
-              The production indexer is now running at <a href="https://dev.cid.contact">dev.cid.contact</a> as our infra continues to mature
+              A bunch of work this week has centered on getting the loose ends wrangled for the complete gossip mesh network story. That's involved <a href="https://github.com/filecoin-project/lotus/pull/7313/commits/c084130d3eb84a2ecc5acf3ceb63aafec90941f4">work</a>  from @masih and @gammazero, along with integration thanks to the boost/markets team!
             </li>
             <li>
-              Looking at the actual behavior of ingesting a full provider index, @Marco  wrote a <a href="https://github.com/filecoin-project/storetheindex/pull/177">proposal</a> for a cleaner ingestion pipeline, and improved <a href="https://github.com/filecoin-project/storetheindex/pull/180">resilience</a> in the current pipeline.
+              We're picking up progress on the client side of store the index, with an integration for the IPFS DHT <a href="https://github.com/libp2p/hydra-booster/pull/158">written</a> and beginning load testing.
             </li>
-            <li>@gammazero finished tracking down some <a href="https://github.com/filecoin-project/go-legs/pull/73">restart</a> <a href="https://github.com/filecoin-project/storetheindex/pull/166">bugs</a>, and improved <a href="https://github.com/filecoin-project/storetheindex/pull/169">cache behavior</a>
+            <li>
+              We've fixed a steady stream of bugs/edge cases in <a href="https://github.com/filecoin-project/storetheindex/pulls?q=is%3Apr+is%3Aclosed">storetheindex</a>
             </li>
-            <li>@masih did a bunch of the provider side work to get us ready to roll out to more providers, including a <a href="https://github.com/filecoin-project/index-provider/pull/152">validation tool</a> and docs work
+            <li>
+              We've made progress on <a href="https://github.com/filecoin-project/index-provider/pull/167"></a>documentation</a>, and are working on a run-book to help with keeping the service running
+            </li>
+            <li>
+              @Marco's <a href="https://github.com/MarcoPolo/http-index-provider-example">http index provider</a> library in rust expands our options for provider integration
+            </li>
+            <li>
+              There's a burn-down task list we're using to track remaining work for roll out. We should have that somewhere public next week!
             </li>
           </ul>
-<p>We’re excited to begin testing with more providers next week!</p>
         </div>
         <div class="flex flex-wrap items-center justify-around  max-w-4xl mt-6 sm:w-full">
           <div class="flex flex-wrap flex-col w-100% items-left max-w-4xl mt-6 sm:w-full">
