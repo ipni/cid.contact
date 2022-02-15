@@ -117,7 +117,7 @@ h1, h2, h3, h4, h5, h6 {
             </div>
             <div class="flex flex-wrap flex-col w-100% items-left max-w-4xl mt-6 sm:w-full">
                 <h2 class="text-2xl text-left font-bold">Status</h2>
-                <aside>Last Updated: Feb 4th</aside>
+                <aside>Last Updated: Feb 15th</aside>
                 <h3 class="text-1xl text-left pt-2"><b><a href="https://github.com/filecoin-project/storetheindex/">Store The Index</a></b>: A network index node storing a mapping of CID to provider. Status: Full ingestion of 1 provider. Working on resilience of syncs across restarts. More providers next week.</h3>
                 <h3 class="text-1xl text-left pt-2"><b><a href="https://github.com/filecoin-project/index-provider">Index Provider</a></b>: A library for providing advertising provided content over the indexer '<a href="https://github.com/filecoin-project/index-provider/blob/docs/design/docs/design.md">ingestion protocol</a>'. Status: Test instance running and validated. Integration into lotus markets validated on local storage provider. Next step: validation with larger set of storage providers.</h3>
                 <h3 class="text-1xl text-left pt-2"><b><a href="https://github.com/ipfs-shipyard/w3rc/">Retrieval Client</a></b>: A small client for retrieving content using a network indexer for content routing. Status: Manual success for individual graphsync retrievals against index provider instance.</h3>
@@ -126,28 +126,25 @@ h1, h2, h3, h4, h5, h6 {
             </div>
         </div>
         <div class="flex flex-wrap flex-col w-100% items-left max-w-4xl mt-6 sm:w-full">
-          <h2 class="text-2xl text-left font-bold">🗄 Weekly Update from Feb 4th</h2>
+          <h2 class="text-2xl text-left font-bold">🗄 Weekly Update from Feb 11th. We're expanding testing!</h2>
           <ul>
             <li>
-              We've recruited a group of storage providers for the next phase of testing, and expect to begin that next week. Final touches for the branch to test are landing <a href="https://github.com/filecoin-project/lotus/pull/7313">here</a> thanks to some final heroic rebasing action from @Aarsh
+              We fixed a <a href="https://github.com/filecoin-project/storetheindex/pull/197">bunch</a> of <a href="https://github.com/filecoin-project/go-legs/pull/82">bugs</a> in indexer ingestion, thanks to @gammazero, @masih, and @Marco
             </li>
             <li>
-              A bunch of work this week has centered on getting the loose ends wrangled for the complete gossip mesh network story. That's involved <a href="https://github.com/filecoin-project/lotus/pull/7313/commits/c084130d3eb84a2ecc5acf3ceb63aafec90941f4">work</a>  from @masih and @gammazero, along with integration thanks to the boost/markets team!
+              @Paolo was able to demonstrate a full end-to-end flow for an HTTP provider -> Indexer -> Hydra -> IPFS flow
             </li>
             <li>
-              We're picking up progress on the client side of store the index, with an integration for the IPFS DHT <a href="https://github.com/libp2p/hydra-booster/pull/158">written</a> and beginning load testing.
+              The <a href="https://github.com/libp2p/hydra-booster/pull/158">Hydra plugin</a> for Indexer delegated routing has been deployed to one hydra instance for testing on the road to deployment.
             </li>
             <li>
-              We've fixed a steady stream of bugs/edge cases in <a href="https://github.com/filecoin-project/storetheindex/pulls?q=is%3Apr+is%3Aclosed">storetheindex</a>
+              We finished configuration of <a href="https://github.com/filecoin-project/lotus/pull/8045">gossip sub</a> through the lotus gossip mesh, and spent a while on validating the flow of gossip messages through the mesh.
             </li>
             <li>
-              We've made progress on <a href="https://github.com/filecoin-project/index-provider/pull/167"></a>documentation</a>, and are working on a run-book to help with keeping the service running
+              We updated our operational setup to expose appropriate ingestion and query interfaces
             </li>
             <li>
-              @Marco's <a href="https://github.com/MarcoPolo/http-index-provider-example">http index provider</a> library in rust expands our options for provider integration
-            </li>
-            <li>
-              There's a burn-down task list we're using to track remaining work for roll out. We should have that somewhere public next week!
+              excited to begin testing with more providers next week!
             </li>
           </ul>
         </div>
