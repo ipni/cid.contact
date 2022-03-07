@@ -117,7 +117,7 @@ h1, h2, h3, h4, h5, h6 {
             </div>
             <div class="flex flex-wrap flex-col w-100% items-left max-w-4xl mt-6 sm:w-full">
                 <h2 class="text-2xl text-left font-bold">Status</h2>
-                <aside>Last Updated: Mar 1st</aside>
+                <aside>Last Updated: Mar 7th</aside>
                 <h3 class="text-1xl text-left pt-2"><b><a href="https://github.com/filecoin-project/storetheindex/">Store The Index</a></b>: A network index node storing a mapping of CID to provider. Status: Full ingestion of 6 providers. More providers ongoing.</h3>
                 <h3 class="text-1xl text-left pt-2"><b><a href="https://github.com/filecoin-project/index-provider">Index Provider</a></b>: A library for providing advertising provided content over the indexer '<a href="https://github.com/filecoin-project/index-provider/blob/docs/design/docs/design.md">ingestion protocol</a>'. Status: Running on some lotus production providers.</h3>
                 <h3 class="text-1xl text-left pt-2"><b><a href="https://github.com/ipfs-shipyard/w3rc/">Retrieval Client</a></b>: A small client for retrieving content using a network indexer for content routing. Status: success for individual graphsync, bitswap retrievals</h3>
@@ -126,19 +126,25 @@ h1, h2, h3, h4, h5, h6 {
             </div>
         </div>
         <div class="flex flex-wrap flex-col w-100% items-left max-w-4xl mt-6 sm:w-full">
-          <h2 class="text-2xl text-left font-bold">🗄 Weekly Update from Feb 25th. Scaling</h2>
+          <h2 class="text-2xl text-left font-bold">🗄 Store the Index weekly update from March 5th</h2>
           <ul>
             <li>
-              We tracked down and tested a few lingering bugs in the network indexer implementation this week.
+              Index provider has been <a href="https://github.com/filecoin-project/lotus/pull/7313">merged</a> into lotus master!
             </li>
             <li>
-              The <a href="https://github.com/filecoin-project/storetheindex/pull/224">cleaner ingestion code</a> that @Marco has been working on has landed.
+              We have confirmation that our gossipsub mesh is working as intended now that the mesh has stabilized
             </li>
             <li>
-              We implemented a <a href="https://github.com/filecoin-project/storetheindex/pull/228">set</a> of <a href="https://github.com/filecoin-project/go-legs/pull/99">fixes</a> around syncing large initial manifests from storage providers.
+              Our transport protocols now have canonical IDs in the multicodecs table! bitswap is 0x900 and graphsync is 0x910.
             </li>
             <li>
-              We sorted out the remaining steps in <a href="https://www.notion.so/pl-strflt/Lotus-Rollout-07d6051b6087458a99c6f0a4abcb17d5">releasing</a> and are working through additional code reviews in both markets and <a href="https://github.com/filecoin-project/lotus/pull/7313">lotus</a>.
+              We fixed a host of bugs (<a href="https://github.com/filecoin-project/go-legs/pull/102">backpressure</a>, <a href="https://github.com/filecoin-project/storetheindex/pull/244">metrics</a>)
+            </li>
+            <li>
+              @gammazero added <a href="https://github.com/filecoin-project/storetheindex/pull/247">periodic re-syncing</a>
+            </li>
+            <li>
+              @Marco got some initial numbers from a <a href="https://github.com/filecoin-project/storetheindex/pull/245">load testing tool</a> indicating that the current configuration should have no problems ingesting 100,000's of cids per second.
             </li>
           </ul>
         </div>
