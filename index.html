@@ -194,7 +194,11 @@ h1, h2, h3, h4, h5, h6 {
     if (sb == "") {
       sb = 'bafybeigvgzoolc3drupxhlevdp2ugqcrbcsqfmcek2zxiw5wctk3xjpjwy';
     }
-    fetch('./cid/' + sb)
+    let p = '.'
+    if (window.location != window.parent.location) {
+      p = document.referrer
+    }
+    fetch(p + '/cid/' + sb)
       .then(response => response.json())
       .then(data => {
         let inner = '<h4>Found at</h4><ul>';
