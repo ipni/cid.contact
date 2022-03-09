@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cid Indexing and Content Routing</title>
+    <title>Interplanetary Indexing and Content Routing</title>
     <style type="text/css">
         *, ::after, ::before {
   box-sizing: border-box;
@@ -98,18 +98,40 @@ h1, h2, h3, h4, h5, h6 {
 .text-left {
   text-align: left;
 }
+#sb {
+  margin: 1em;
+  border: 0;
+  border-bottom: 2px solid #ccc;
+  font-weight: 500;
+  font-size: 1.1em;
+}
+#lookup {
+  color: white;
+  padding: 0.6em;
+  font-weight: 700;
+  font-size: 1.1em;
+  border: 1px solid #ccc;
+}
     </style>
 </head>
 <body>
     <div class="flex flex-col items-center min-h-screen">
     <div class="flex w-full p-8 justify-between items-center bg-gradient-to-r from-pl-blue to-pl-green">
         <a href="/">
-            <h1 class="text-3xl text-white text-center cursor-pointer">CID.Contact</h1>
+            <h1 class="text-3xl text-white text-center cursor-pointer">CID Contact - An Interplanetary Network Index</h1>
         </a>
     </div>
     <main>
         <div class="flex flex-wrap items-center justify-around  max-w-4xl mt-6 sm:w-full">
-            <div class="flex flex-wrap flex-col w-100% items-left max-w-4xl mt-6 sm:w-full">
+          <div class="flex flex-wrap flex-col w-100% items-left max-w-4xl mt-6 sm:w-full">
+            <h2 class="text-2xl text-left font-bold">CID Lookup</h2>
+            <h3 class="text-1xl text-left pt-2">
+              <input id="sb" size="60" type="text" value="" placeholder="bafybeigvgzoolc3drupxhlevdp2ugqcrbcsqfmcek2zxiw5wctk3xjpjwy"/>
+              <input id="lookup" type="button" value="Contact" class="bg-gradient-to-r from-pl-blue to-pl-green">
+            </h3>
+            <h3 class="text-1xl text-left pt-2" id="results"></h3>
+        </div>
+        <div class="flex flex-wrap flex-col w-100% items-left max-w-4xl mt-6 sm:w-full">
                 <h2 class="text-2xl text-left font-bold">About</h2>
                 <h3 class="text-1xl text-left pt-2">Content routing is the a term used to describe the problem of finding providers for a given piece of content. If you have a hash, or CID of some data, how do you find who has it?</h3>
                 <h3 class="text-1xl text-left pt-2">In <a href="https://ipfs.io">IPFS</a>, a DHT is used as a decentralized answer to content routing. When considering the number of records present in Filecoin storage providers, it is clear that simply announcing these records to the DHT will place an undue burden on current DHT participants. It will take too much bandwidth and storage space to be practical.</h3>
@@ -157,4 +179,107 @@ h1, h2, h3, h4, h5, h6 {
     </main>
     </div>
 </body>
+<script type="text/javascript" src="cbor.js"></script>
+<script type="text/javascript">
+  window.addEventListener('load', () => {
+    document.getElementById('lookup').addEventListener('click', onSearch, false);
+    document.getElementById('sb').addEventListener('keypress', (e) => {
+      if (e.keyCode === 13) {
+        onSearch();
+      }
+    }, false);
+  })
+  function onSearch() {
+    let sb = document.getElementById('sb').value;
+    if (sb == "") {
+      sb = 'bafybeigvgzoolc3drupxhlevdp2ugqcrbcsqfmcek2zxiw5wctk3xjpjwy';
+    }
+    fetch('./cid/' + sb)
+      .then(response => response.json())
+      .then(data => {
+        let inner = '<h4>Found at</h4><ul>';
+        const res = data.MultihashResults[0];
+        let providers = {};
+        for (let i = 0; i < res.ProviderResults.length; i++) {
+          let provider = res.ProviderResults[i];
+          if (providers[provider.Provider.ID] == undefined) {
+            providers[provider.Provider.ID] = {}
+          }
+          providers[provider.Provider.ID][provider.ContextID] = provider;
+        }
+        const pids = Object.keys(providers)
+        for (let i = 0; i < pids.length; i ++) {
+          let pd = providers[pids[i]];
+          inner += '<li><h4>' + pids[i] + '</h4>';
+          let addrs = '';
+          let keys = {};
+          let contexts = Object.keys(pd);
+          for (let j = 0; j < contexts.length; j++) {
+            let name = protocolName(pd[contexts[j]].Metadata);
+            if (keys[name] == undefined) {
+              keys[name] = [];
+            }
+            let ctx = toContext(pd[contexts[j]].Metadata)
+            if (ctx != "") {
+              keys[name].push(ctx)
+            }
+            addrs = pd[contexts[j]].Provider.Addrs;
+          }
+          inner += '<h5>Multiaddrs: ' + addrs +'</h5>'
+          for (let j = 0; j < Object.keys(keys).length; j++) {
+            inner += '<h5>' + Object.keys(keys)[j] + '</h5><ul>';
+            for (let k = 0; k < keys[Object.keys(keys)[j]].length; k++) {
+              inner += '<li>' + keys[Object.keys(keys)[j]][k] + '</li>';
+            }
+            inner += '</ul>'
+          }
+        }
+        inner += '</ul>';
+        document.getElementById('results').innerHTML = inner;
+      })
+      .catch(error => {
+        document.getElementById('results').innerHTML = error;
+      })
+  }
+  function protocolName(entry) {
+    if (entry.ProtocolID == 0x900) {
+      return 'Bitswap';
+    } else if (entry.ProtocolID == 0x910 || entry.ProtocolID == 4128768) {
+      return 'Graphsync';
+    } else {
+      return 'unknown';
+    }
+  }
+  function toContext(metadata) {
+    if (protocolName(metadata) == 'Graphsync') {
+      const rawArr = base64ToBytesArr(metadata.Data)
+      try {
+        const cbor = CBOR.decode(Uint8Array.from(rawArr).buffer)
+        const cid = window.b2c(Uint8Array.from(cbor.PieceCID).subarray(1))
+        let str = 'In piece ' + cid.toString()
+        if (cbor.VerifiedDeal) {
+          str += ' (Stored as verified data)';
+        }
+        if (cbor.FastRetrieval) {
+          str += ' (Unsealed copy available)';
+        }
+        return str
+      } catch(e) {
+        return 'Non-CBOR Context:' + e;
+      }
+    }
+    return '';
+  }
+  const abc = [..."ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"];
+  function base64ToBytesArr(str) {
+  let result = [];
+  for(let i=0; i<str.length/4; i++) {
+    let chunk = [...str.slice(4*i,4*i+4)]
+    let bin = chunk.map(x=> abc.indexOf(x).toString(2).padStart(6,0)).join(''); 
+    let bytes = bin.match(/.{1,8}/g).map(x=> +('0b'+x));
+    result.push(...bytes.slice(0,3 - (str[4*i+2]=="=") - (str[4*i+3]=="=")));
+  }
+  return result;
+}
+</script>
 </html>
