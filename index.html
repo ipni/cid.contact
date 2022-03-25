@@ -23,6 +23,21 @@ html {
   line-height: 1.5;
   tab-size: 4;
 }
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+th {
+    background-color: #dddddd;
+}
+td {
+    background-color: #eeeeff;
+}
+td, th {
+  border: 1px solid black;
+  text-align: left;
+  padding: 8px;
+}
 .to-pl-green {
   --tw-gradient-to: #4ef286;
 }
@@ -199,9 +214,19 @@ h1, h2, h3, h4, h5, h6 {
       p = document.referrer
     }
     fetch(p + '/cid/' + sb)
-      .then(response => response.json())
+      .then((response) => {
+        if (response.status >= 200 && response.status <= 299) {
+          return response.json();
+        } else if (response.status == 404) {
+            throw "No results for this query";
+        } else if (response.status == 400) {
+            throw "Bad request - check that the CID is correct";
+        } else {
+            throw Error(response.statusText);
+        }
+      })
       .then(data => {
-        let inner = '<h4>Found at</h4><ul>';
+        let inner = '<table style="border:3px; border-style:solid; border-color:#287EC7; padding: 1em;"><tr><th>Found at</th>';
         const res = data.MultihashResults[0];
         let providers = {};
         for (let i = 0; i < res.ProviderResults.length; i++) {
@@ -214,7 +239,7 @@ h1, h2, h3, h4, h5, h6 {
         const pids = Object.keys(providers)
         for (let i = 0; i < pids.length; i ++) {
           let pd = providers[pids[i]];
-          inner += '<li><h4>' + pids[i] + '</h4>';
+          inner += '<tr><td><h4>' + pids[i] + '</h4>';
           let addrs = '';
           let keys = {};
           let contexts = Object.keys(pd);
@@ -238,11 +263,14 @@ h1, h2, h3, h4, h5, h6 {
             inner += '</ul>'
           }
         }
-        inner += '</ul>';
+        inner += '</td></tr></table>';
         document.getElementById('results').innerHTML = inner;
       })
       .catch(error => {
-        document.getElementById('results').innerHTML = error;
+        let inner = '<p class="tab" style="border:3px; border-style:solid; border-color:#FF0000; padding: 1em; margin-bottom: 1em;">';
+        inner += error;
+        inner += '</p>';
+        document.getElementById('results').innerHTML = inner;
       })
   }
   function protocolName(entry) {
