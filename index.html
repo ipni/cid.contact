@@ -181,6 +181,35 @@ h1, h2, h3, h4, h5, h6 {
 </body>
 <script type="text/javascript" src="cbor.js"></script>
 <script type="text/javascript">
+// varint decoding
+var MSB = 0x80
+  , REST = 0x7F
+
+function readVarint(buf, offset) {
+  var res    = 0
+    , offset = offset || 0
+    , shift  = 0
+    , counter = offset
+    , b
+    , l = buf.length
+
+  do {
+    if (counter >= l || shift > 49) {
+      readVarint.bytes = 0
+      throw new RangeError('Could not decode varint')
+    }
+    b = buf[counter++]
+    res += shift < 28
+      ? (b & REST) << shift
+      : (b & REST) * Math.pow(2, shift)
+    shift += 7
+  } while (b >= MSB)
+
+  readVarint.bytes = counter - offset
+
+  return res
+}
+
   window.addEventListener('load', () => {
     document.getElementById('lookup').addEventListener('click', onSearch, false);
     document.getElementById('sb').addEventListener('keypress', (e) => {
@@ -219,15 +248,21 @@ h1, h2, h3, h4, h5, h6 {
           let keys = {};
           let contexts = Object.keys(pd);
           for (let j = 0; j < contexts.length; j++) {
-            let name = protocolName(pd[contexts[j]].Metadata);
-            if (keys[name] == undefined) {
-              keys[name] = [];
+            let mdBytes = base64ToBytesArr(pd[contexts[j]].Metadata);
+            while(mdBytes.length > 0) {
+              let next = popProtocol(mdBytes);
+              let name = next[0];
+              mdBytes = next[1];
+              let ctx = toContext(name, mdBytes);
+              if (keys[name] == undefined) {
+                keys[name] = [];
+              }
+              if (ctx[0] != "") {
+                keys[name].push(ctx[0])
+              }
+              mdBytes = ctx[1];
+              addrs = pd[contexts[j]].Provider.Addrs;
             }
-            let ctx = toContext(pd[contexts[j]].Metadata)
-            if (ctx != "") {
-              keys[name].push(ctx)
-            }
-            addrs = pd[contexts[j]].Provider.Addrs;
           }
           inner += '<h5>Multiaddrs: ' + addrs +'</h5>'
           for (let j = 0; j < Object.keys(keys).length; j++) {
@@ -245,20 +280,22 @@ h1, h2, h3, h4, h5, h6 {
         document.getElementById('results').innerHTML = error;
       })
   }
-  function protocolName(entry) {
-    if (entry.ProtocolID == 0x900) {
-      return 'Bitswap';
-    } else if (entry.ProtocolID == 0x910 || entry.ProtocolID == 4128768) {
-      return 'Graphsync';
+  function popProtocol(buf) {
+    let code = readVarint(buf, 0);
+    buf = buf.slice(readVarint.bytes);
+
+    if (code == 0x900) {
+      return ['Bitswap', buf];
+    } else if (code == 0x910 || code == 4128768) {
+      return ['Graphsync', buf];
     } else {
-      return 'unknown';
+      return [code, buf];
     }
   }
-  function toContext(metadata) {
-    if (protocolName(metadata) == 'Graphsync') {
-      const rawArr = base64ToBytesArr(metadata.Data)
+  function toContext(code, buf) {
+    if (code == 'Graphsync') {
       try {
-        const cbor = CBOR.decode(Uint8Array.from(rawArr).buffer)
+        const cbor = CBOR.decode(Uint8Array.from(buf).buffer);
         const cid = window.b2c(Uint8Array.from(cbor.PieceCID).subarray(1))
         let str = 'In piece ' + cid.toString()
         if (cbor.VerifiedDeal) {
@@ -267,12 +304,12 @@ h1, h2, h3, h4, h5, h6 {
         if (cbor.FastRetrieval) {
           str += ' (Unsealed copy available)';
         }
-        return str
+        return [str, Uint8Array.from([])]
       } catch(e) {
-        return 'Non-CBOR Context:' + e;
+        return ['Non-CBOR Context:' + e, buf]
       }
     }
-    return '';
+    return ['', buf];
   }
   const abc = [..."ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"];
   function base64ToBytesArr(str) {
