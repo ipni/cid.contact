@@ -233,6 +233,11 @@ function readVarint(buf, offset) {
       }
     }, false);
   })
+
+  function joinPath(a, b) {
+    return (a[a.length - 1] === "/" ? a : a + "/") + b
+  }
+
   function onSearch() {
     let sb = document.getElementById('sb').value;
     if (sb == "") {
@@ -242,7 +247,7 @@ function readVarint(buf, offset) {
     if (window.location != window.parent.location) {
       p = document.referrer
     }
-    fetch(p + '/cid/' + sb)
+    fetch(`${joinPath(p,'cid')}/${sb}`)
       .then((response) => {
         if (response.status >= 200 && response.status <= 299) {
           return response.json();
