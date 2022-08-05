@@ -45,8 +45,13 @@ export default function Home(props) {
     // Total Indexer Nodes
     setTotalIndexerNodes(optionsList.length);
 
+    let root = '/';
+    if (window.location != window.parent.location) {
+      root = document.referrer
+    }
+
     // Total Indexed
-    fetch("https://dev.cid.contact/stats")
+    fetch(root + "/stats")
       .then((res) => res.json())
       .then(
         (result) => {
@@ -64,7 +69,7 @@ export default function Home(props) {
     setTotalIndexed(totalIndexedResult);
 
     // Total Providers
-    fetch("https://dev.cid.contact/providers")
+    fetch(root + "/providers")
       .then((res) => res.json())
       .then(
         (result) => {
@@ -80,8 +85,8 @@ export default function Home(props) {
     setTotalProviders(totalProvidersResponse.length);
 
     // Uptime
-    fetch("https://api.uptimerobot.com/v2/getMonitors", {
-      body: "api_key=ur1627161-9cac4a9b63c5d62559d8ef5b&monitors=791322928&custom_uptime_ratios=30&format=json&logs=1",
+    fetch("https://api.uptimerobot.com/v2/getMonitors?api_key=ur1627161-9cac4a9b63c5d62559d8ef5b&monitors=791322928&custom_uptime_ratios=30&format=json&logs=1", {
+      body: "",
       headers: {
         "Cache-Control": "no-cache",
         "Content-Type": "application/x-www-form-urlencoded",
