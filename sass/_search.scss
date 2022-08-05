@@ -1,0 +1,304 @@
+.results {
+  position: relative;
+  margin-top: 130px;
+  margin-bottom: 30px;
+  padding-bottom: 70px;
+  min-height: 0;
+  
+  @include media-breakpoint-up(sm) {
+    padding-bottom: 200px;
+  }
+  
+  &.active{
+    margin-bottom: 0px;
+    padding-bottom: 50px;
+    
+    @include media-breakpoint-up(sm) {
+      padding-bottom: 50px;
+    }
+  }
+
+  .lookupBg {
+    top: -150px;
+    max-height: 150%;
+    min-height: 100%;
+    bottom: auto;
+  }
+
+  .formRow {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 44px;
+
+    .inputWrapper {
+      position: relative;
+      width: 100%;
+      max-width: 550px;
+      padding: 4px;
+      margin-top: 20px;
+
+      @include media-breakpoint-up(sm) {
+        margin-right: 20px;
+      }
+
+      input {
+        width: 100%;
+        height: 43px;
+        padding: 8px;
+        background: $white;
+        border: 2px solid transparent;
+        border-radius: 8px;
+        position: relative;
+        z-index: 3;
+
+        &::-webkit-input-placeholder,
+        &:-ms-input-placeholder,
+        &::placeholder {
+          color: $ltGrey;
+        }
+
+        transition: border-color 0.4s ease;
+
+        &:focus,
+        &:focus-within {
+          border-color: $dkBlue;
+          outline: none;
+        }
+      }
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        //transform: translate(-50%, -50%);
+        background: #1890ff;
+        opacity: 0.2;
+        border-radius: 9.08778px;
+        z-index: 1;
+      }
+    }
+
+    .btn {
+      width: 154px;
+      height: 43px;
+      margin-top: 20px;
+      text-transform: uppercase;
+      font-size: 18px;
+      -webkit-font-smoothing: antialiased;
+    }
+  }
+
+  div.selectWrapper {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin-top: 20px;
+    margin-right: 20px;
+
+    div.selectContainer {
+      width: 235px;
+      padding: 4px;
+      position: relative;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        //transform: translate(-50%, -50%);
+        background: #1890ff;
+        opacity: 0.2;
+        border-radius: 9.08778px;
+        z-index: 1;
+      }
+    }
+
+    button {
+      background: $white;
+      border: 2px solid transparent;
+      border-radius: 8px;
+      width: 100%;
+      height: 43px;
+      padding: 6px 16px 6px 8px;
+      position: relative;
+      text-align: center;
+      z-index: 2;
+      transition: border-color 0.4s ease;
+
+      &:focus,
+      &:focus-within {
+        outline: none;
+        border-color: $dkBlue;
+      }
+    }
+
+    button:hover {
+      cursor: pointer;
+    }
+
+    button::after {
+      content: "";
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      width: 0;
+      height: 0;
+      transform: translateY(-50%);
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+      border-left: 6px solid $black;
+      transition: transform 0.4s ease;
+    }
+
+    button.expanded::after {
+      transform: translateY(-50%) rotate(-90deg);
+    }
+
+    ul.options {
+      position: absolute;
+      top: calc(100% - 11px);
+      left: 6px;
+      width: calc(100% - 12px);
+      padding: 4px 0;
+      background-color: $white;
+      display: none;
+      list-style: none;
+      text-align: center;
+      z-index: 3;
+      transition: background-color 0.4s ease;
+    }
+
+    ul.show {
+      display: block;
+    }
+
+    ul.options li {
+      padding: 16px 10px;
+    }
+
+    ul.options li:active,
+    ul.options li:focus,
+    ul.options li:hover {
+      background: lighten($blue, 10%);
+      cursor: pointer;
+    }
+
+    ul.options li[aria-selected="true"] {
+      background: $blue;
+      cursor: pointer;
+    }
+  }
+
+  // Accoridons
+  .accordion-item {
+    background-color: transparent !important;
+    border: 0 !important;
+    padding-bottom: 28px;
+  }
+  .accordion-header {
+    margin-bottom: 0;
+  }
+  .accordion-button {
+    background-color: $mdBlue !important;
+    box-shadow: none !important;
+    border: 0 !important;
+    height: 100px;
+    padding: 0 60px 0px 20px;
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 1em;
+    color: $white !important;
+
+    @include media-breakpoint-up(sm) {
+      padding: 0 60px 0px 20px;
+      font-size: 25px;
+    }
+
+    &::after {
+      width: 20px;
+      height: 12px;
+      background-size: 20px;
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform-origin: 50% 9px;
+      transform: translateY(-50%);
+      background-image: url("data:image/svg+xml,%3Csvg width='26' height='15' viewBox='0 0 26 15' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M24 13L13 2L2 13' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+    }
+
+    &:not(.collapsed) {
+      //background-color: $dkGrey !important;
+      &::after {
+        transform: translateY(-90%) rotate(-180deg);
+        background-size: 20px;
+        background-position: 55% 0%;
+      }
+    }
+  }
+  .accordion-collapse {
+    overflow: hidden;
+    height: 0;
+    padding: 0;
+    opacity: 0;
+    transition: opacity 1s ease;
+    
+    &.show{
+      height: auto;
+      opacity: 1;
+    }
+
+    .resultItem {
+      padding: 22px;
+      background-color: darken($white, 2%);
+
+      &:nth-child(even) {
+        background-color: $ltGrey;
+      }
+
+      h4 {
+        margin-bottom: 20px;
+        font-size: 16px;
+        font-weight: 600;
+        color: $dkrBlue;
+        text-transform: uppercase;
+      }
+
+      dl {
+        margin-bottom: 0;
+
+        dt {
+          color: rgba($black, 0.47);
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 17px;
+          margin-bottom: 5px;
+        }
+        dd {
+          color: $black;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 17px;
+          margin-bottom: 20px;
+          word-break: break-all;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+
+  .errorNotice{
+    font-size: 22px;
+    font-weight: 500;
+    color: #979797;
+  }
+}

@@ -1,0 +1,177 @@
+.hero {
+  position: relative;
+  //min-height: 100vh;
+  text-align: center;
+  margin-bottom: 50px;
+  padding-top: 130px;
+  padding-bottom: 130px;
+  padding-left: 15px;
+  padding-right: 15px;
+  
+  @include media-breakpoint-up(lg) {
+    padding-top: 220px;
+    padding-bottom: 220px;
+  }
+
+  h2 {
+    margin-bottom: 30px;
+    font-size: 24px;
+    font-weight: 600;
+
+    @include media-breakpoint-up(lg) {
+      margin-bottom: 30px;
+      font-size: 41px;
+    }
+  }
+
+  p {
+    font-size: 15px;
+    font-weight: 400;
+
+    @include media-breakpoint-up(lg) {
+      font-size: 21px;
+    }
+  }
+
+  .dataRow {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 479px;
+    margin-left: auto;
+    margin-right: auto;
+    
+    @include media-breakpoint-up(sm) {
+      margin-top: 30px;
+      max-width: 490px;
+    }
+
+    @include media-breakpoint-up(xl) {
+      max-width: none;
+      margin-left: -50px;
+      margin-right: -50px;
+    }
+
+    .dataCol {
+      padding: 20px;
+
+      @include media-breakpoint-up(sm) {
+        padding: 30px;
+      }
+
+      @include media-breakpoint-up(xl) {
+        padding: 50px;
+      }
+
+      .innerWrapper {
+        width: 120px;
+        height: 120px;
+
+        @include media-breakpoint-up(sm) {
+          width: 185px;
+          height: 185px;
+        }
+
+        .box {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          padding: 14px;
+          border-radius: 30px;
+
+          @include media-breakpoint-up(sm) {
+            padding: 31px;
+          }
+
+          .bgImage {
+            background-image: url(../public/images/boxGradient.png);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 30px;
+            z-index: 2;
+            box-shadow: 0px 31.5096px 58.6943px -25.3312px rgba(36, 135, 190, 0.7), 62.4013px -43.2484px 90.8217px -40px rgba(151, 226, 134, 0.5);
+          }
+
+          &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            box-shadow: inset 0px 0px 11.121px rgba($white, 0.82);
+            border-radius: 30px;
+            z-index: 3;
+          }
+
+          &::after {
+            content: "";
+            position: absolute;
+            top: 5px;
+            left: 0;
+            width: 120px;
+            height: 120px;
+            z-index: 1;
+            background-image: url(../public/images/boxGradientBehind.png);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            border-radius: 30px;
+            
+            @include media-breakpoint-up(sm) {
+              top: 9px;
+              width: 185px;
+              height: 185px;
+            }
+          }
+
+          .textWrapper {
+            text-align: center;
+            position: relative;
+            z-index: 4;
+
+            p {
+              margin-bottom: 0;
+              color: $white;
+              font-size: 11px;
+              line-height: 14px;
+              text-shadow: 0px 4px 4px rgba($black, 0.50);
+              font-weight: 500;
+
+              @include media-breakpoint-up(sm) {
+                font-size: 14px;
+                line-height: 17px;
+              }
+
+              strong {
+                display: block;
+                font-size: 23px;
+                line-height: 1.2em;
+                margin-bottom: 5px;
+                font-weight: 500;
+
+                @include media-breakpoint-up(sm) {
+                  margin-bottom: 15px;
+                  font-size: 48px;
+                  line-height: 59px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
