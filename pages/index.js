@@ -57,16 +57,16 @@ export default function Home(props) {
         (result) => {
           setIsLoaded(true);
           setTotalIndexedResponse(result);
+          const totalIndexedResult = abbreviateNumber(
+            totalIndexedResponse ? totalIndexedResponse.EntriesEstimate : 0
+          );
+          setTotalIndexed(totalIndexedResult);
         },
         (error) => {
           setIsLoaded(true);
           setError(error);
         }
       );
-    const totalIndexedResult = abbreviateNumber(
-      totalIndexedResponse.EntriesEstimate
-    );
-    setTotalIndexed(totalIndexedResult);
 
     // Total Providers
     fetch(root + "/providers")
@@ -79,16 +79,18 @@ export default function Home(props) {
         (error) => {
           setProviderIsLoaded(true);
           setProviderError(error);
+          setTotalProvidersResponse(0);
         }
       );
 
-    setTotalProviders(totalProvidersResponse.length);
+    if (totalProvidersResponse) {
+      setTotalProviders(totalProvidersResponse.length);
+    }
 
     // Uptime
     fetch("https://api.uptimerobot.com/v2/getMonitors?api_key=ur1627161-9cac4a9b63c5d62559d8ef5b&monitors=791322928&custom_uptime_ratios=30&format=json&logs=1", {
-      body: "",
+      body: "api_key=ur1627161-9cac4a9b63c5d62559d8ef5b&monitors=791322928&custom_uptime_ratios=30&format=json&logs=1",
       headers: {
-        "Cache-Control": "no-cache",
         "Content-Type": "application/x-www-form-urlencoded",
       },
       method: "POST",
@@ -98,6 +100,9 @@ export default function Home(props) {
         (result) => {
           setUptimeIsLoaded(true);
           setUptimeResponse(result);
+          if (result) {
+            setUptime(result.monitors[0].custom_uptime_ratio);
+          }
         },
 
         (error) => {
@@ -105,8 +110,6 @@ export default function Home(props) {
           setUptimeError(error)
         }
       );
-
-      setUptime(uptimeResponse.custom_uptime_ratio);
 
     (() => {
       "use strict";
@@ -774,7 +777,7 @@ export default function Home(props) {
             <h2>Content Routing for the Distributed Web</h2>
             <p>An Interplanetary Network Index built for IPFS and Filecoin</p>
             <div className="dataRow">
-              <div className="dataCol">
+              <div className={totalIndexed ? 'dataCol' : 'hidden'}>
                 <div className="innerWrapper">
                   <div className="box">
                     <div className="textWrapper">
@@ -787,7 +790,7 @@ export default function Home(props) {
                   </div>
                 </div>
               </div>
-              <div className="dataCol">
+              <div className={totalProviders ? 'dataCol' : 'hidden'}>
                 <div className="innerWrapper">
                   <div className="box">
                     <div className="textWrapper">
@@ -1183,12 +1186,6 @@ function onSearch(
   if (sb == "") {
     sb = "bafybeigvgzoolc3drupxhlevdp2ugqcrbcsqfmcek2zxiw5wctk3xjpjwy";
   }
-  let p = ".";
-  if (window.location != window.parent.location) {
-    p = document.referrer;
-  }
-
-  console.log();
 
   const endpoints = [
     "https://cid.contact",
