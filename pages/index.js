@@ -741,7 +741,7 @@ export default function Home(props) {
         <title>CID Contact</title>
         <meta
           name="description"
-          content="An Interplenatary Network Index built for IPFS and Filecoin"
+          content="An Interplanetary Network Indexer built for IPFS and Filecoin"
         />
         <link
           rel="apple-touch-icon"
@@ -775,7 +775,7 @@ export default function Home(props) {
         >
           <section className="hero" ref={homeRef}>
             <h2>Content Routing for the Distributed Web</h2>
-            <p>An Interplanetary Network Index built for IPFS and Filecoin</p>
+            <p>An Interplanetary Network Indexer built for IPFS and Filecoin</p>
             <div className="dataRow">
               <div className={totalIndexed ? 'dataCol' : 'hidden'}>
                 <div className="innerWrapper">
