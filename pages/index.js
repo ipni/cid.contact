@@ -809,7 +809,7 @@ export default function Home(props) {
                     <div className="textWrapper">
                       <p>
                         <strong>{totalIndexerNodes && totalIndexerNodes}</strong>
-                        Number of Prod Indexer Nodes
+                        Number of Indexer Node Operators
                       </p>
                     </div>
                     <div className="bgImage"></div>
