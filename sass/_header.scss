@@ -32,7 +32,7 @@
   }
 
   &.scrolled{
-    //background-color: #f5fbfd;
+    background-color: #f5fbfd;
   }
 
   .container {
@@ -68,7 +68,7 @@
       left: 50%;
       transform: translateX(-50%);
     }
-      
+
     @include media-breakpoint-up(lg) {
       position: static;
       margin-left: 168px;
@@ -84,7 +84,7 @@
       margin: 0 4px;
       flex-grow: 0;
       flex-shrink: 0;
-      
+
       @media (min-width: 380px){
         width: 41px;
         margin: 0 5px;
@@ -225,7 +225,7 @@
   padding: 2px 2px 4px 0px;
   transform: translateY(0.9px);
   z-index: 9997;
-  
+
   @include media-breakpoint-up(sm) {
     margin-left: 24px;
   }
@@ -271,7 +271,7 @@
     // &.marginFix {
     //   margin-right: 13px;
     // }
-    
+
     .icon-bar:nth-of-type(2) {
       top: 4px;
       transform: rotate(45deg);
