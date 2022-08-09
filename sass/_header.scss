@@ -50,7 +50,7 @@
     h1 {
       font-weight: 600;
       margin: 0;
-      font-size: 20px;
+      font-size: 18px;
 
       @include media-breakpoint-up(lg) {
         font-size: 25px;
@@ -86,7 +86,7 @@
       flex-shrink: 0;
 
       @media (min-width: 380px){
-        width: 41px;
+        width: 36px;
         margin: 0 5px;
       }
 
@@ -254,7 +254,7 @@
     }
   }
   .icon-bar + .icon-bar {
-    margin-top: 5px;
+    margin-top: 3px;
   }
   .icon-bar:nth-of-type(2) {
     z-index: 2;
@@ -273,7 +273,7 @@
     // }
 
     .icon-bar:nth-of-type(2) {
-      top: 4px;
+      top: 0px;
       transform: rotate(45deg);
     }
     .icon-bar:nth-of-type(3) {

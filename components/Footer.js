@@ -66,7 +66,7 @@ function Footer(props) {
             xs={8}
             lg={7}
             xxl={6}
-            className="offset-xxl-1 ps-xxl-5 pe-4 pe-sm-0"
+            className="offset-xxl-1 ps-xxl-0 pe-4 pe-sm-0"
           >
             <h5>
               We are committed to deliver the best content discovery and routing
@@ -94,7 +94,7 @@ function Footer(props) {
               </a>
             </p>
           </Col>
-          <Col xs={4} lg={5} xl={12}>
+          <Col xs={4} lg={5} xl={12} className="d-flex d-lg-block align-items-end justify-content-end mb-3">
             <div className="logoWrapper">
               <a href="https://ipfs.io/" target="_blank" rel="noreferrer">
                 <img
