@@ -1,6 +1,6 @@
 {
-    "name": "",
-    "short_name": "",
+    "name": "Network Indexer",
+    "short_name": "Network Indexer",
     "icons": [
         {
             "src": "android-chrome-48x48.png",

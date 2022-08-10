@@ -23,3 +23,13 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - run: npm run build
+
+    - uses: actions/checkout@v3
+      with:
+        ref: "main"
+    - run: rm -r dev/* && mv out/* dev/
+
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v4
+      with:
+        base: "main"
