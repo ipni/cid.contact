@@ -1,10 +1,10 @@
 footer {
   position: relative;
   overflow: hidden;
-  padding: 130px 0 70px;
+  padding: 130px 0 90px;
 
   @include media-breakpoint-up(sm) {
-    padding: 140px 0 80px;
+    padding: 140px 0 110px;
   }
 
   .bg {
