@@ -93,6 +93,18 @@
       @include media-breakpoint-up(lg) {
         width: 50px;
       }
+
+      &.ipfs{
+        width: 28px;
+
+        @media (min-width: 380px){
+          width: 31px;
+        }
+
+        @include media-breakpoint-up(lg) {
+          width: 45px;
+        }
+      }
     }
   }
 

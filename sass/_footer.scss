@@ -144,6 +144,14 @@ footer {
         width: 50px;
         margin: 0 7px;
       }
+
+      &.ipfs{
+        width: 33px;
+
+        @include media-breakpoint-up(md) {
+          width: 45px;
+        }
+      }
     }
   }
 }

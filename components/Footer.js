@@ -98,7 +98,7 @@ function Footer(props) {
             <div className="logoWrapper">
               <a href="https://ipfs.io/" target="_blank" rel="noreferrer">
                 <img
-                  className="logo"
+                  className="logo ipfs"
                   src="images/IPFS-logo.svg"
                   alt="IPFS Logo"
                 />
