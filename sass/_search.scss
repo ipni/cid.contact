@@ -23,6 +23,7 @@
     max-height: 150%;
     min-height: 100%;
     bottom: auto;
+    overflow: visible;
   }
 
   .formRow {
@@ -99,11 +100,23 @@
     position: relative;
     margin-top: 20px;
     margin-right: 20px;
+    width: calc(100% - 178px);
+    max-width: 200px;
+    min-width: 160px;
+    
+    @include media-breakpoint-up(sm) {
+      max-width: inherit;
+      width: auto;
+    }
 
     div.selectContainer {
-      width: 235px;
+      width: 100%;
       padding: 4px;
       position: relative;
+      
+      @include media-breakpoint-up(sm) {
+        width: 235px;
+      }
 
       &::before {
         content: "";
@@ -209,14 +222,15 @@
     background-color: $mdBlue !important;
     box-shadow: none !important;
     border: 0 !important;
-    height: 100px;
+    height: 55px;
     padding: 0 60px 0px 20px;
     font-size: 25px;
     font-weight: 600;
     line-height: 1em;
     color: $white !important;
-
+    
     @include media-breakpoint-up(sm) {
+      height: 100px;
       padding: 0 60px 0px 20px;
       font-size: 25px;
     }
