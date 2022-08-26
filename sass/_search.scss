@@ -1,11 +1,14 @@
 .results {
   position: relative;
-  margin-top: 130px;
+  margin-top: 0;
   margin-bottom: 30px;
+  padding-top: 130px;
   padding-bottom: 70px;
   min-height: 0;
   
   @include media-breakpoint-up(sm) {
+    margin-top: 130px;
+    padding-top: 0;
     padding-bottom: 200px;
   }
   
@@ -19,11 +22,15 @@
   }
 
   .lookupBg {
-    top: -150px;
+    top: 0;
     max-height: 150%;
     min-height: 100%;
     bottom: auto;
     overflow: visible;
+
+    @include media-breakpoint-up(sm) {
+      top: -150px;
+    }
   }
 
   .formRow {
