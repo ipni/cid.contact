@@ -4,6 +4,7 @@ import { Row, Col } from "react-bootstrap";
 import TopBg from "../svgs/TopBg.js";
 import LookupBg from "../svgs/LookupBg.js";
 import { Waypoint } from "react-waypoint";
+import Slider from "react-slick";
 import cbor from "cbor";
 
 export default function Home(props) {
@@ -12,7 +13,14 @@ export default function Home(props) {
   const aboutRef = props.aboutRef;
   const abbreviateNumber = props.abbreviateNumber;
   const [queryString, setQueryString] = useState("");
-  const optionsList = ["CID Contact", "Ken Labs", "PiKniK", "SXX"];
+  const optionsList = [
+    "CID Contact",
+    "FilSwan",
+    "Ken Labs",
+    "Leeway Hertz",
+    "PiKniK",
+    "SXX",
+  ];
   const [selectedOption, setSelectedOption] = useState(0);
 
   const [displayData, setDisplayData] = useState();
@@ -45,9 +53,9 @@ export default function Home(props) {
     // Total Indexer Nodes
     setTotalIndexerNodes(optionsList.length);
 
-    let root = '/';
+    let root = "/";
     if (window.location != window.parent.location) {
-      root = document.referrer
+      root = document.referrer;
     }
 
     // Total Indexed
@@ -88,13 +96,16 @@ export default function Home(props) {
     }
 
     // Uptime
-    fetch("https://api.uptimerobot.com/v2/getMonitors?api_key=ur1627161-9cac4a9b63c5d62559d8ef5b&monitors=791322928&custom_uptime_ratios=30&format=json&logs=1", {
-      body: "api_key=ur1627161-9cac4a9b63c5d62559d8ef5b&monitors=791322928&custom_uptime_ratios=30&format=json&logs=1",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      method: "POST",
-    })
+    fetch(
+      "https://api.uptimerobot.com/v2/getMonitors?api_key=ur1627161-9cac4a9b63c5d62559d8ef5b&monitors=791322928&custom_uptime_ratios=30&format=json&logs=1",
+      {
+        body: "api_key=ur1627161-9cac4a9b63c5d62559d8ef5b&monitors=791322928&custom_uptime_ratios=30&format=json&logs=1",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        method: "POST",
+      }
+    )
       .then((res) => res.json())
       .then(
         (result) => {
@@ -107,7 +118,7 @@ export default function Home(props) {
 
         (error) => {
           setUptimeIsLoaded(true);
-          setUptimeError(error)
+          setUptimeError(error);
         }
       );
 
@@ -735,6 +746,43 @@ export default function Home(props) {
       };
     })();
   }, [totalIndexed, totalIndexerNodes, uptime]);
+
+  var settings = {
+    dots: true,
+    infinite: true,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
+  };
+
   return (
     <>
       <Head>
@@ -777,7 +825,7 @@ export default function Home(props) {
             <h2>Content Routing for the Distributed Web</h2>
             <p>An Interplanetary Network Indexer built for IPFS and Filecoin</p>
             <div className="dataRow">
-              <div className={totalIndexed ? 'dataCol' : 'hidden'}>
+              <div className={totalIndexed ? "dataCol" : "hidden"}>
                 <div className="innerWrapper">
                   <div className="box">
                     <div className="textWrapper">
@@ -790,7 +838,7 @@ export default function Home(props) {
                   </div>
                 </div>
               </div>
-              <div className={totalProviders ? 'dataCol' : 'hidden'}>
+              <div className={totalProviders ? "dataCol" : "hidden"}>
                 <div className="innerWrapper">
                   <div className="box">
                     <div className="textWrapper">
@@ -808,7 +856,9 @@ export default function Home(props) {
                   <div className="box">
                     <div className="textWrapper">
                       <p>
-                        <strong>{totalIndexerNodes && totalIndexerNodes}</strong>
+                        <strong>
+                          {totalIndexerNodes && totalIndexerNodes}
+                        </strong>
                         Number of Indexer Node Operators
                       </p>
                     </div>
@@ -1002,7 +1052,7 @@ export default function Home(props) {
 
               <h3>Partners</h3>
 
-              <div className="imageRow">
+              <Slider {...settings}>
                 <a
                   href="https://kencloud.com/"
                   target="_blank"
@@ -1025,6 +1075,13 @@ export default function Home(props) {
                   <img src="images/PiKNiK.svg" alt="PiKNiK Logo" />
                 </a>
                 <a
+                  href="https://www.filswan.com/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <img src="images/FilSwan-logo.svg" alt="FilSwan Logo" />
+                </a>
+                <a
                   href="https://www.sxxfuture.com/"
                   target="_blank"
                   rel="noreferrer"
@@ -1044,7 +1101,7 @@ export default function Home(props) {
                 >
                   <img src="images/Cloudflare.svg" alt="Cloudflare Logo" />
                 </a>
-              </div>
+              </Slider>
             </div>
           </section>
         </Waypoint>
@@ -1189,7 +1246,9 @@ function onSearch(
 
   const endpoints = [
     "https://cid.contact",
+    "https://filecoin-indexer.filswan.com",
     "https://index-finder.kencloud.com",
+    " https://i.dltstack.co",
     "https://filecoin-indexer.piknik.com:3443",
     "https://filecoin-indexer.sxxfuture.com:33005",
   ];

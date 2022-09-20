@@ -31,10 +31,10 @@ body {
     font-weight: 600;
   }
 
-  h3{
+  h3 {
     font-size: calc(1.3rem + 0.6vw);
 
-    @media (min-width: 1200px){
+    @media (min-width: 1200px) {
       font-size: 1.875rem;
     }
   }
@@ -43,17 +43,53 @@ body {
     overflow: hidden;
   }
 
-  .container{
+  .container {
     max-width: 1024px;
   }
-  header{
-    .container{
+  header {
+    .container {
       max-width: 1185px;
     }
   }
-
 }
 
 .hidden {
   display: none;
+}
+
+.slick-slider{
+  margin-top: 30px;
+  margin-bottom: 60px;
+  padding-bottom: 30px;
+}
+
+.slick-list{
+  margin: 0 -26px;
+}
+
+.slick-track {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.slick-slide {
+  height: inherit !important;
+  outline: none;
+  
+  div{
+    outline: none;
+    height: inherit !important;
+    
+    a{
+      outline: none;
+      
+      img{
+        width: 100%;
+        height: auto;
+        display: block;
+        padding: 0 26px;
+      }
+    }
+  }
 }
