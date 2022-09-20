@@ -61,6 +61,15 @@ body {
   margin-top: 30px;
   margin-bottom: 60px;
   padding-bottom: 30px;
+
+  .slick-dots li button:before{
+    content: "";
+    width: 8px;
+    height: 8px;
+    background-color: $dkBlue;
+    border-radius: 50%;
+    font-family: $montserrat !important;
+  }
 }
 
 .slick-list{
@@ -83,7 +92,7 @@ body {
     
     a{
       outline: none;
-      
+
       img{
         width: 100%;
         height: auto;
