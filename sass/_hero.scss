@@ -86,7 +86,7 @@
           border-radius: 30px;
 
           @include media-breakpoint-up(sm) {
-            padding: 31px;
+            padding: 25px;
           }
 
           .bgImage {
@@ -150,9 +150,17 @@
               text-shadow: 0px 4px 4px rgba($black, 0.50);
               font-weight: 500;
 
+              br{
+                display: none;
+              }
+              
               @include media-breakpoint-up(sm) {
                 font-size: 14px;
                 line-height: 17px;
+                
+                br{
+                  display: block;
+                }
               }
 
               strong {
