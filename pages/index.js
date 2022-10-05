@@ -831,7 +831,7 @@ export default function Home(props) {
                     <div className="textWrapper">
                       <p>
                         <strong>{totalIndexed && totalIndexed}</strong>
-                        Total CIDs Indexed
+                        Total CIDs <br/>Indexed
                       </p>
                     </div>
                     <div className="bgImage"></div>
@@ -844,7 +844,7 @@ export default function Home(props) {
                     <div className="textWrapper">
                       <p>
                         <strong>{totalProviders && totalProviders}</strong>
-                        Total Number of Providers
+                        Total Number <br/>of Providers
                       </p>
                     </div>
                     <div className="bgImage"></div>
@@ -859,7 +859,7 @@ export default function Home(props) {
                         <strong>
                           {totalIndexerNodes && totalIndexerNodes}
                         </strong>
-                        Number of Indexer Node Operators
+                        Number of Indexer <br/>Node Operators
                       </p>
                     </div>
                     <div className="bgImage"></div>
@@ -872,7 +872,7 @@ export default function Home(props) {
                     <div className="textWrapper">
                       <p>
                         <strong>{uptime && uptime}</strong>
-                        Uptime in the last 30 days
+                        Uptime in the <br/>last 30 days
                       </p>
                     </div>
                     <div className="bgImage"></div>
