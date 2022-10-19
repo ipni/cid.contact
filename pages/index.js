@@ -902,6 +902,20 @@ export default function Home(props) {
                     setQueryString(e.target.value);
                     setSearchError();
                   }}
+                  onKeyUp={(e) => {
+                    if (e.code == "Enter") {
+                      handelSearch(
+                        queryString,
+                        optionsList,
+                        selectedOption,
+                        displayData,
+                        setDisplayData,
+                        accordionState,
+                        setAccordionState,
+                        setSearchError
+                      )
+                    }
+                  }}
                 />
               </div>
               <CustomSelect
@@ -1269,7 +1283,7 @@ function onSearch(
     })
     .then((data) => {
       const res = data.MultihashResults[0];
-      const test = res.ProviderResults;
+      const provResults = res.ProviderResults;
 
       let providers = {};
       for (let i = 0; i < res.ProviderResults.length; i++) {
@@ -1306,22 +1320,22 @@ function onSearch(
             }
           }
         }
-        let newArr = [...test];
+        let toDisplay = [];
 
         for (const [index, value] of Object.keys(keys).entries()) {
-          newArr[i]["Protocol"] = value;
+          let displayEntry = {...provResults[i]};
+          displayEntry["Protocol"] = value;
 
           const deals = [];
-          for (const [dealIndex, dealValue] of keys[
-            Object.keys(keys)
-          ].entries()) {
+          for (const [dealIndex, dealValue] of keys[value].entries()) {
             deals.push(dealValue);
           }
           if (deals.length) {
-            newArr[i].DealInfo = deals;
+            displayEntry["DealInfo"] = deals;
           }
+          toDisplay.push(displayEntry);
         }
-        setDisplayData(newArr);
+        setDisplayData(toDisplay);
       }
     })
     .catch((error) => {
@@ -1407,7 +1421,7 @@ function handelSearch(
 function toggleAccordion(accordionState, setAccordionState) {
   setTimeout(() => {
     const parentDiv = document.querySelector(".accordion-collapse");
-    if (parentDiv.children.length > 0) {
+    if (parentDiv && (parentDiv.children.length > 0)) {
       accordionState ? setAccordionState(false) : setAccordionState(true);
     }
   }, 250);
