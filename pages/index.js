@@ -1278,7 +1278,7 @@ function onSearch(
       } else if (response.status == 400) {
         throw "Bad request - check that the CID is correct";
       } else {
-        throw Error(response.statusText);
+        throw response.statusText;
       }
     })
     .then((data) => {
