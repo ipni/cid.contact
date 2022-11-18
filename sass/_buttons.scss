@@ -1,0 +1,96 @@
+.btn {
+  border-radius: 8px;
+  padding: 0.8em 1.6em 0.9em;
+  background-color: transparent;
+  border: none;
+  min-width: 206px;
+  //font-family: $sfProDisplay;
+  font-size: 17px;
+  font-weight: 700;
+  transition: color 0.4s ease, background-color 0.4s ease,
+    border-color 0.4s ease;
+}
+
+.btn-primary {
+  color: $white;
+  background: linear-gradient(135deg, $blue 0%, $green 100%);
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, $green 0%, $blue 100%);
+    border-radius: 8px;
+    opacity: 0;
+    z-index: 1;
+    transition: opacity 0.4s ease;
+  }
+
+  span {
+    position: relative;
+    z-index: 2;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    z-index: 1;
+    transition: border-color 0.4s ease;
+  }
+
+  &:hover {
+    color: $white;
+
+    &::before {
+      opacity: 1;
+    }
+  }
+
+  &:active,
+  &:focus {
+    border: none;
+    border-color: $dkBlue;
+    color: $white;
+    outline: none !important;
+
+    &::after{
+      border-color: $dkBlue;
+    }
+
+    &::before {
+      opacity: 1;
+    }
+  }
+}
+
+.btn.btn-secondary.btn-sm,
+.btn.btn-primary.btn-sm {
+  padding: 0.5em 1.3em;
+  min-width: auto;
+}
+
+.noStyle {
+  background-color: transparent;
+  border: none;
+  border-radius: none;
+  padding: 0;
+  outline: none;
+
+  &:hover,
+  &:active,
+  &:focus {
+    outline: none;
+  }
+}

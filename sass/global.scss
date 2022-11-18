@@ -1,0 +1,22 @@
+@import '_vars';
+
+// bootstrap
+@import "~bootstrap/scss/bootstrap";
+
+// Global Styles
+@import '_overall';
+@import '_buttons';
+
+// Components
+@import '_header';
+@import '_footer';
+@import '_backgrounds';
+
+// Sections
+@import '_hero';
+@import '_search';
+@import '_about';
+
+// Slick Carouesl
+@import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css";

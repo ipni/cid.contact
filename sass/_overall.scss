@@ -1,0 +1,104 @@
+body {
+  min-height: 100vh;
+  background-color: $white;
+  position: relative;
+  font-family: $montserrat;
+  font-weight: 400;
+
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: darken($white, 10%);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $blue;
+    transition: background 0.6s ease;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: lighten($blue, 5%);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    // font-family: $vanguard;
+    font-weight: 600;
+  }
+
+  h3 {
+    font-size: calc(1.3rem + 0.6vw);
+
+    @media (min-width: 1200px) {
+      font-size: 1.875rem;
+    }
+  }
+
+  main {
+    overflow: hidden;
+  }
+
+  .container {
+    max-width: 1024px;
+  }
+  header {
+    .container {
+      max-width: 1185px;
+    }
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+.slick-slider{
+  margin-top: 30px;
+  margin-bottom: 60px;
+  padding-bottom: 30px;
+
+  .slick-dots li button:before{
+    content: "";
+    width: 8px;
+    height: 8px;
+    background-color: $dkBlue;
+    border-radius: 50%;
+    font-family: $montserrat !important;
+  }
+}
+
+.slick-list{
+  margin: 0 -26px;
+}
+
+.slick-track {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.slick-slide {
+  height: inherit !important;
+  outline: none;
+  
+  div{
+    outline: none;
+    height: inherit !important;
+    
+    a{
+      outline: none;
+
+      img{
+        width: 100%;
+        height: auto;
+        display: block;
+        padding: 0 26px;
+      }
+    }
+  }
+}

@@ -1,0 +1,157 @@
+footer {
+  position: relative;
+  overflow: hidden;
+  padding: 130px 0 90px;
+
+  @include media-breakpoint-up(sm) {
+    padding: 140px 0 110px;
+  }
+
+  .bg {
+    &.footerBg {
+      min-height: 0;
+      height: 100%;
+    }
+  }
+
+  h4 {
+    font-size: calc(1.3rem + 0.6vw);
+    font-weight: 600;
+    margin-bottom: 35px;
+    
+    @include media-breakpoint-up(lg) {
+      font-size: 30px;
+      margin-bottom: 65px;
+
+    }
+  }
+  
+  h5{
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.2em;
+    margin-bottom: 15px;
+    
+    @include media-breakpoint-up(lg) {
+      font-size: 25px;
+      line-height: 30.48px;
+      margin-bottom: 50px;
+    }
+
+    @include media-breakpoint-up(xl) {
+      margin-top: 41px;
+    }
+  }
+
+  p{
+    font-size: 11px;
+    line-height: 1.2em;
+    font-weight: 400;
+    
+    @include media-breakpoint-up(lg) {
+      font-size: 15px;
+      line-height: 18.29px;
+    }
+  }
+
+  nav {
+    display: inline-block;
+    margin-bottom: 10px;
+    
+    @include media-breakpoint-up(xl) {
+      margin-bottom: 30px;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      columns: 2;
+      -webkit-columns: 2;
+      -moz-columns: 2;
+
+      li {
+        padding-right: 20px;
+        padding-bottom: 15px;
+
+        @include media-breakpoint-up(lg) {
+        padding-bottom: 30px;
+        }
+
+        a {
+          position: relative;
+          font-size: 14px;
+          font-weight: 400;
+          text-decoration: none;
+          color: $black;
+          transition: color 0.4s ease;
+          
+          @include media-breakpoint-up(lg) {
+            font-size: 16px;
+          }
+
+          &::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 2px;
+            background-color: transparent;
+            transition: background-color 0.4s ease;
+          }
+
+          &:hover {
+            color: $blue;
+
+            &::after {
+              background-color: $dkBlue;
+            }
+          }
+
+          &.active {
+            &::after {
+              background-color: $dkBlue;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .logoWrapper {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    
+    @include media-breakpoint-up(md) {
+      margin: 0 -14px;
+    }
+
+    @include media-breakpoint-up(xl) {
+      justify-content: flex-start;
+    }
+
+    .logo {
+      width: 38px;
+      height: auto;
+      margin: 0 4px;
+      flex-grow: 0;
+      flex-shrink: 0;
+      
+      @include media-breakpoint-up(md) {
+        width: 50px;
+        margin: 0 7px;
+      }
+
+      &.ipfs{
+        width: 33px;
+
+        @include media-breakpoint-up(md) {
+          width: 45px;
+        }
+      }
+    }
+  }
+}
