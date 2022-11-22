@@ -47,8 +47,8 @@ jobs:
       - name: Prepare artifacts
         run: |
           mkdir -p _site/dev
-          cp -r out _site
-          cp -r out _site/dev
+          cp -r out/* _site
+          cp -r out/* _site/dev
       - name: Upload artifacts
         uses: actions/upload-pages-artifact@v1
       - name: Deploy to GitHub Pages
