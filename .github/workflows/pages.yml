@@ -2,9 +2,7 @@ name: Deploy Pages
 
 on:
   push:
-    branches: ["main"]
-
-  workflow_dispatch:
+    branches: [ "main" ]
 
 permissions:
   contents: read
@@ -34,10 +32,25 @@ jobs:
         run: |
           npm ci
           npm run build
-      - name: Upload artifact
+      # Copy generated static artifacts twice:
+      #  * once to `_site` folder, and 
+      #  * once to a sub directory inside it called `dev`.
+      # 
+      # The former is the default directory picked up by `actions/upload-pages-artifact@v1`.
+      # The latter is the configured relative path to static asserts for instance running on `dev` 
+      # environment.
+      #
+      # This means any changes that are merged to `main` are automatically deployed on both `prod` 
+      # and `dev` environments.
+      # 
+      # See: https://github.com/actions/upload-pages-artifact/blob/main/action.yml#L8
+      - name: Prepare artifacts
+        run: |
+          mkdir -p _site/dev
+          cp -r out _site
+          cp -r out _site/dev
+      - name: Upload artifacts
         uses: actions/upload-pages-artifact@v1
-        with:
-          path: 'out'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
