@@ -1295,6 +1295,8 @@ function onSearch(
       }
       const pids = Object.keys(providers);
 
+      let toDisplay = [];
+
       for (let i = 0; i < pids.length; i++) {
         let pd = providers[pids[i]];
         let addrs = "";
@@ -1320,7 +1322,6 @@ function onSearch(
             }
           }
         }
-        let toDisplay = [];
 
         for (const [index, value] of Object.keys(keys).entries()) {
           let displayEntry = {...provResults[i]};
@@ -1335,8 +1336,8 @@ function onSearch(
           }
           toDisplay.push(displayEntry);
         }
-        setDisplayData(toDisplay);
       }
+      setDisplayData(toDisplay);
     })
     .catch((error) => {
       setSearchError(error);
