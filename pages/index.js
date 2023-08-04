@@ -1109,6 +1109,9 @@ export default function Home(props) {
                 <a href="https://infura.io/" target="_blank" rel="noreferrer">
                   <img src="images/Infura.svg" alt="Infura Logo" />
                 </a>
+                <a href="https://distributedstorage.com/" target="_blank" rel="noreferrer">
+                  <img src="images/dss.svg" alt="DSS Logo" />
+                </a>
                 <a
                   href="https://www.cloudflare.com/"
                   target="_blank"
