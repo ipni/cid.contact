@@ -826,7 +826,13 @@ export default function Home(props) {
             <h2>Content Routing for the Distributed Web</h2>
             <p>An Interplanetary Network Indexer built for IPFS and Filecoin</p>
             <div className="dataRow">
-              <div className={totalIndexed ? "dataCol" : "hidden"}>
+              
+                {/* Hide total indexed CIDs until there is an accurate measure. See:
+                     * https://github.com/ipni/cid.contact/issues/17
+                    
+                    To show the count again, change `className` to `{totalIndexed ? "dataCol" : "hidden"}`.
+                 */}
+                <div className="hidden">
                 <div className="innerWrapper">
                   <div className="box">
                     <div className="textWrapper">
