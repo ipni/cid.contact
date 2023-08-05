@@ -20,6 +20,7 @@ export default function Home(props) {
     "Leeway Hertz",
     "PiKniK",
     "SXX",
+    "DSS",
   ];
   const [selectedOption, setSelectedOption] = useState(0);
 
@@ -1114,6 +1115,9 @@ export default function Home(props) {
                 <a href="https://infura.io/" target="_blank" rel="noreferrer">
                   <img src="images/Infura.svg" alt="Infura Logo" />
                 </a>
+                <a href="https://distributedstorage.com/" target="_blank" rel="noreferrer">
+                  <img src="images/dss.svg" alt="DSS Logo" />
+                </a>
                 <a
                   href="https://www.cloudflare.com/"
                   target="_blank"
@@ -1268,9 +1272,10 @@ function onSearch(
     "https://cid.contact",
     "https://filecoin-indexer.filswan.com",
     "https://index-finder.kencloud.com",
-    " https://i.dltstack.co",
+    "https://i.dltstack.co",
     "https://filecoin-indexer.piknik.com:3443",
     "https://filecoin-indexer.sxxfuture.com:33005",
+    "https://indexer.syd.distributedstorage.com",
   ];
 
   const endpoint = endpoints[selectedOption];
