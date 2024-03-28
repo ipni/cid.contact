@@ -310,7 +310,6 @@ button.navbar-toggle {
   .hamburger:after {
     transform: translate(-50%, -240%);
     background: currentColor;
-
   }
 
   @include media-breakpoint-up(lg) {
