@@ -823,35 +823,191 @@ export default function Home(props) {
           //onLeave={() => handelHomeLeave(setPagePos)}
         >
           <section className="hero" ref={homeRef}>
-            <h2>Content Routing for the Distributed Web</h2>
-            <p>An Interplanetary Network Indexer built for IPFS and Filecoin</p>
+            <h2>Content Discovery & Routing for the Distributed Web</h2>
+            <p>
+              CID Contact is an Interplanetary Network Indexer built for IPFS
+              and Filecoin. <br />
+              Search by CID in the tool below or{" "}
+              <a href="https://docs.cid.contact/">
+                <strong>learn more.</strong>
+              </a>
+            </p>
+            <div
+              className={
+                accordionState && !searchError ? "results active" : "results"
+              }
+            >
+              <div className="container">
+                <div className="formRow">
+                  <div className="selectInputWrapper">
+                    <CustomSelect
+                      selectedOption={selectedOption}
+                      setSelectedOption={setSelectedOption}
+                      optionsList={optionsList}
+                    />
+                    <div className="inputWrapper">
+                      <input
+                        type="text"
+                        name="queryString"
+                        id="queryString"
+                        placeholder="Search by CID"
+                        value={queryString}
+                        onChange={(e) => {
+                          setQueryString(e.target.value);
+                          setSearchError();
+                        }}
+                        onKeyUp={(e) => {
+                          if (e.code == "Enter") {
+                            handelSearch(
+                              queryString,
+                              optionsList,
+                              selectedOption,
+                              displayData,
+                              setDisplayData,
+                              accordionState,
+                              setAccordionState,
+                              setSearchError
+                            );
+                          }
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <button
+                    className="btn btn-primary btn-sm"
+                    onClick={() =>
+                      handelSearch(
+                        queryString,
+                        optionsList,
+                        selectedOption,
+                        displayData,
+                        setDisplayData,
+                        accordionState,
+                        setAccordionState,
+                        setSearchError
+                      )
+                    }
+                  >
+                    <span>Search</span>
+                  </button>
+                </div>
+                {searchError && <p className="errorNotice">{searchError}</p>}
+                {!searchError && displayData && (
+                  <div className="accordionWrapper">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        toggleAccordion(accordionState, setAccordionState)
+                      }
+                      className={
+                        accordionState
+                          ? "accordion-button collapsed"
+                          : "accordion-button"
+                      }
+                    >
+                      <span>
+                        CID Contact Results ({displayData && displayData.length}
+                        )
+                      </span>
+                    </button>
+                    <div
+                      className={
+                        accordionState
+                          ? "accordion-collapse show"
+                          : "accordion-collapse"
+                      }
+                    >
+                      <div className="resultItem glossary">
+                        <div className="resultItem">
+                          <dl>
+                            <dt>Peer Id:</dt>
+                            <dd>
+                              A peer ID in IPFS is a distinctive crypographic
+                              hash derived from a node's public key, serving as
+                              a unique identifier for nodes in the network and
+                              playing a crucial role in IPFS's decentralized
+                              structure.
+                            </dd>
+
+                            <dt>MultiAddress:</dt>
+                            <dd>
+                              Network address format that combines multiple
+                              transport protocols and addressing details.
+                            </dd>
+
+                            <dt>Protocol:</dt>
+                            <dd>
+                              A protocol refers to a set of rules and
+                              conventions that define how data is structured,
+                              transmitted, and interpreted within the network.
+                            </dd>
+
+                            <dt>Deal Info:</dt>
+                            <dd>
+                              Details about the terms, conditions, and
+                              parameters of the data storage or retrieval
+                              agreement between the parties involved in the
+                              transation.
+                            </dd>
+                          </dl>
+                        </div>
+                      </div>
+                      <div className="resultWrapper">
+                        {displayData.map((dataResult, resultIndex) => (
+                          <div className="resultItem" key={resultIndex}>
+                            <dl>
+                              <dt>Peer Id:</dt>
+                              <dd>{dataResult.Provider.ID}</dd>
+
+                              <dt>MultiAddress:</dt>
+                              <dd>{dataResult.Provider.Addrs}</dd>
+
+                              {dataResult.Protocol && (
+                                <>
+                                  <dt>Protocol:</dt>
+                                  <dd>{dataResult.Protocol}</dd>
+                                </>
+                              )}
+
+                              {dataResult.DealInfo && (
+                                <>
+                                  <dt>Deal Info:</dt>
+                                  <dd>
+                                    {dataResult.DealInfo.map(
+                                      (dealInfo, dIndex) => (
+                                        <span key={dIndex}>
+                                          {dealInfo}
+                                          <br />
+                                        </span>
+                                      )
+                                    )}
+                                  </dd>
+                                </>
+                              )}
+                            </dl>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+              <LookupBg />
+            </div>
             <div className="dataRow">
-              
-                {/* Hide total indexed CIDs until there is an accurate measure. See:
+              {/* Hide total indexed CIDs until there is an accurate measure. See:
                      * https://github.com/ipni/cid.contact/issues/17
                     
                     To show the count again, change `className` to `{totalIndexed ? "dataCol" : "hidden"}`.
                  */}
-                <div className="hidden">
+              <div className="hidden">
                 <div className="innerWrapper">
                   <div className="box">
                     <div className="textWrapper">
                       <p>
                         <strong>{totalIndexed && totalIndexed}</strong>
-                        Total CIDs <br/>Indexed
-                      </p>
-                    </div>
-                    <div className="bgImage"></div>
-                  </div>
-                </div>
-              </div>
-              <div className={totalProviders ? "dataCol" : "hidden"}>
-                <div className="innerWrapper">
-                  <div className="box">
-                    <div className="textWrapper">
-                      <p>
-                        <strong>{totalProviders && totalProviders}</strong>
-                        Total Number <br/>of Providers
+                        Total CIDs <br />
+                        Indexed
                       </p>
                     </div>
                     <div className="bgImage"></div>
@@ -866,7 +1022,12 @@ export default function Home(props) {
                         <strong>
                           {totalIndexerNodes && totalIndexerNodes}
                         </strong>
-                        Number of Indexer <br/>Node Operators
+                      </p>
+                    </div>
+                    <div className="textWrapper">
+                      <p>
+                        Indexer Node <br />
+                        Operators
                       </p>
                     </div>
                     <div className="bgImage"></div>
@@ -879,7 +1040,11 @@ export default function Home(props) {
                     <div className="textWrapper">
                       <p>
                         <strong>{uptime && uptime}</strong>
-                        Uptime in the <br/>last 30 days
+                      </p>
+                    </div>
+                    <div className="textWrapper">
+                      <p>
+                        30-Day Uptime <br /> %
                       </p>
                     </div>
                     <div className="bgImage"></div>
@@ -890,133 +1055,6 @@ export default function Home(props) {
             <TopBg />
           </section>
         </Waypoint>
-        <section
-          className={
-            accordionState && !searchError ? "results active" : "results"
-          }
-        >
-          <div className="container">
-            <h3>Look up your CID</h3>
-            <div className="formRow">
-              <div className="inputWrapper">
-                <input
-                  type="text"
-                  name="queryString"
-                  id="queryString"
-                  placeholder="bafybeigvgzoolc3drupxhlevdp2ugqcrbcsqfmcek2zxiw5wctk3xjpjwy"
-                  value={queryString}
-                  onChange={(e) => {
-                    setQueryString(e.target.value);
-                    setSearchError();
-                  }}
-                  onKeyUp={(e) => {
-                    if (e.code == "Enter") {
-                      handelSearch(
-                        queryString,
-                        optionsList,
-                        selectedOption,
-                        displayData,
-                        setDisplayData,
-                        accordionState,
-                        setAccordionState,
-                        setSearchError
-                      )
-                    }
-                  }}
-                />
-              </div>
-              <CustomSelect
-                selectedOption={selectedOption}
-                setSelectedOption={setSelectedOption}
-                optionsList={optionsList}
-              />
-              <button
-                className="btn btn-primary btn-sm"
-                onClick={() =>
-                  handelSearch(
-                    queryString,
-                    optionsList,
-                    selectedOption,
-                    displayData,
-                    setDisplayData,
-                    accordionState,
-                    setAccordionState,
-                    setSearchError
-                  )
-                }
-              >
-                <span>Contact</span>
-              </button>
-            </div>
-
-            {searchError ? (
-              <p className="errorNotice">{searchError}</p>
-            ) : (
-              <div className="accordionWrapper">
-                <button
-                  type="button"
-                  onClick={() =>
-                    toggleAccordion(accordionState, setAccordionState)
-                  }
-                  className={
-                    accordionState
-                      ? "accordion-button collapsed"
-                      : "accordion-button"
-                  }
-                >
-                  <span></span> Results{" "}
-                </button>
-                <div
-                  className={
-                    accordionState
-                      ? "accordion-collapse show"
-                      : "accordion-collapse"
-                  }
-                >
-                  <>
-                    {displayData &&
-                      displayData.map((dataResult, resultIndex) => (
-                        <div className="resultItem" key={resultIndex}>
-                          <h4>Found At</h4>
-                          <dl>
-                            <dt>Peer Id:</dt>
-                            <dd>{dataResult.Provider.ID}</dd>
-
-                            <dt>Multiaddress:</dt>
-                            <dd>{dataResult.Provider.Addrs}</dd>
-
-                            {dataResult.Protocol && (
-                              <>
-                                <dt>Protocol:</dt>
-                                <dd>{dataResult.Protocol}</dd>
-                              </>
-                            )}
-
-                            {dataResult.DealInfo && (
-                              <>
-                                <dt>Deal Info:</dt>
-                                <dd>
-                                  {dataResult.DealInfo.map(
-                                    (dealInfo, dIndex) => (
-                                      <span key={dIndex}>
-                                        {dealInfo}
-                                        <br />
-                                      </span>
-                                    )
-                                  )}
-                                </dd>
-                              </>
-                            )}
-                          </dl>
-                        </div>
-                      ))}
-                  </>
-                </div>
-              </div>
-            )}
-          </div>
-          <LookupBg />
-        </section>
         <Waypoint
           onEnter={() => handelAboutEnter(setPagePos)}
           //onLeave={() => handelAboutLeave(setPagePos)}
@@ -1115,7 +1153,11 @@ export default function Home(props) {
                 <a href="https://infura.io/" target="_blank" rel="noreferrer">
                   <img src="images/Infura.svg" alt="Infura Logo" />
                 </a>
-                <a href="https://distributedstorage.com/" target="_blank" rel="noreferrer">
+                <a
+                  href="https://distributedstorage.com/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   <img src="images/dss.svg" alt="DSS Logo" />
                 </a>
                 <a
@@ -1335,7 +1377,7 @@ function onSearch(
         }
 
         for (const [index, value] of Object.keys(keys).entries()) {
-          let displayEntry = {...provResults[i]};
+          let displayEntry = { ...provResults[i] };
           displayEntry["Protocol"] = value;
 
           const deals = [];
@@ -1433,7 +1475,7 @@ function handelSearch(
 function toggleAccordion(accordionState, setAccordionState) {
   setTimeout(() => {
     const parentDiv = document.querySelector(".accordion-collapse");
-    if (parentDiv && (parentDiv.children.length > 0)) {
+    if (parentDiv && parentDiv.children.length > 0) {
       accordionState ? setAccordionState(false) : setAccordionState(true);
     }
   }, 250);
