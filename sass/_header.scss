@@ -277,6 +277,7 @@
 
 button.navbar-toggle {
   height: 100%;
+  color: $black;
   transition: color 0.2s ease;
 
   &:hover > * {
