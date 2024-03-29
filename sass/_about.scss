@@ -1,37 +1,43 @@
-.about{
+.about {
+  .container {
+    > p:first-of-type {
+      @include media-breakpoint-up(sm) {
+        max-width: 80%;
+      }
+    }
+  }
 
-  .row{
+  .rowWrapper {
+    margin-block: 6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+  }
+
+  .row {
     max-width: 773px;
-    margin: 50px auto;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
-    @include media-breakpoint-up(lg) {
-      margin: 140px auto;
-      
-      &:first-of-type{
-        margin-top: 50px;
-      }
-    }
 
-
-    .imgCol{
-      img{
+    .imgCol {
+      img {
         display: block;
         height: auto;
         max-width: 100%;
-        margin: 0 auto
+        margin: 0 auto;
+        height: 120px;
       }
     }
 
-    .textCol{
-      p{
+    .textCol {
+      p {
         font-size: 15px;
         font-weight: 400;
         line-height: 19.5px;
 
-        strong{
+        strong {
           font-weight: 700;
           color: $mdBlue;
         }
@@ -39,18 +45,18 @@
     }
   }
 
-  .imageRow{
+  .imageRow {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     margin-top: 50px;
 
-    a{
+    a {
       display: inline-block;
       max-width: 50%;
       padding: 15px;
-      
+
       @include media-breakpoint-up(sm) {
         max-width: 33.333%;
       }
@@ -58,11 +64,38 @@
       @include media-breakpoint-up(lg) {
         padding: 20px 30px;
       }
-      
-      img{
+
+      img {
         width: 100%;
         height: auto;
         display: block;
+      }
+    }
+  }
+
+  .cidContactWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 8rem;
+    gap: 2rem;
+
+    > p {
+      font-size: 1.2rem;
+      margin: 0;
+      text-align: center;
+    }
+
+    .inputWrapper {
+      width: 60%;
+
+      input {
+        width: 100%;
+        border-radius: 6px;
+        border: 2px solid $dkGrey;
+        padding: 6px;
+        text-align: center;
+        color: $black;
       }
     }
   }
