@@ -3,6 +3,45 @@ footer {
   overflow: hidden;
   padding: 130px 0 90px;
 
+  .footerContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+
+    @include media-breakpoint-up(sm) {
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+    }
+
+    > div:first-of-type {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      h5 {
+        font-size: 1.2rem;
+        font-weight: 500;
+        line-height: 1.2em;
+        margin-bottom: 2rem;
+
+        @include media-breakpoint-up(md) {
+          line-height: 30.48px;
+        }
+      }
+
+      p:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    > div:nth-child(2) {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
   @include media-breakpoint-up(sm) {
     padding: 140px 0 110px;
   }
@@ -18,38 +57,19 @@ footer {
     font-size: calc(1.3rem + 0.6vw);
     font-weight: 600;
     margin-bottom: 35px;
-    
+
     @include media-breakpoint-up(lg) {
       font-size: 30px;
       margin-bottom: 65px;
-
-    }
-  }
-  
-  h5{
-    font-size: 13px;
-    font-weight: 500;
-    line-height: 1.2em;
-    margin-bottom: 15px;
-    
-    @include media-breakpoint-up(lg) {
-      font-size: 25px;
-      line-height: 30.48px;
-      margin-bottom: 50px;
-    }
-
-    @include media-breakpoint-up(xl) {
-      margin-top: 41px;
     }
   }
 
-  p{
-    font-size: 11px;
+  p {
+    font-size: 0.8rem;
     line-height: 1.2em;
     font-weight: 400;
-    
+
     @include media-breakpoint-up(lg) {
-      font-size: 15px;
       line-height: 18.29px;
     }
   }
@@ -57,10 +77,8 @@ footer {
   nav {
     display: inline-block;
     margin-bottom: 10px;
-    
-    @include media-breakpoint-up(xl) {
-      margin-bottom: 30px;
-    }
+    width: 50%;
+    text-align: center;
 
     ul {
       margin: 0;
@@ -71,21 +89,20 @@ footer {
       -moz-columns: 2;
 
       li {
-        padding-right: 20px;
         padding-bottom: 15px;
 
         @include media-breakpoint-up(lg) {
-        padding-bottom: 30px;
+          padding-bottom: 30px;
         }
 
         a {
           position: relative;
           font-size: 14px;
-          font-weight: 400;
+          font-weight: 500;
           text-decoration: none;
           color: $black;
           transition: color 0.4s ease;
-          
+
           @include media-breakpoint-up(lg) {
             font-size: 16px;
           }
@@ -122,16 +139,9 @@ footer {
 
   .logoWrapper {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
-    
-    @include media-breakpoint-up(md) {
-      margin: 0 -14px;
-    }
-
-    @include media-breakpoint-up(xl) {
-      justify-content: flex-start;
-    }
+    gap: 1rem;
 
     .logo {
       width: 38px;
@@ -139,13 +149,13 @@ footer {
       margin: 0 4px;
       flex-grow: 0;
       flex-shrink: 0;
-      
+
       @include media-breakpoint-up(md) {
         width: 50px;
         margin: 0 7px;
       }
 
-      &.ipfs{
+      &.ipfs {
         width: 33px;
 
         @include media-breakpoint-up(md) {

@@ -8,9 +8,37 @@ function Footer(props) {
   return (
     <footer>
       <div className="container">
-        <Row>
-          <Col xs={12} xl={5}>
-            <h4>CID Contact</h4>
+        <h4>CID Contact</h4>
+        <div className="footerContainer">
+          <div>
+            <h5>
+              We are committed to deliver the best content discovery and routing
+              infastructure for IPFS & Filecoin.
+            </h5>
+            <div className="contactInfo">
+              <p>
+                For any questions, find us at Filecoin Slack Channel{" "}
+                <a
+                  href="https://filecoinproject.slack.com/archives/C02T827T9N0"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  #storetheindex.
+                </a>
+              </p>
+              <p>
+                For latest project status, visit our public{" "}
+                <a
+                  href="https://www.notion.so/pl-strflt/Weekly-Status-Report-30699cbe5a99473ea98b4ea4f9a3619b"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Notion workspace.
+                </a>
+              </p>
+            </div>
+          </div>
+          <div>
             <nav>
               <ul>
                 <li>
@@ -61,40 +89,6 @@ function Footer(props) {
                 </li>
               </ul>
             </nav>
-          </Col>
-          <Col
-            xs={8}
-            lg={7}
-            xxl={6}
-            className="offset-xxl-1 ps-xxl-0 pe-4 pe-sm-0"
-          >
-            <h5>
-              We are committed to deliver the best content discovery and routing
-              infastructure for IPFS & Filecoin.
-            </h5>
-
-            <p>
-              For any questions, find us at Filecoin Slack Channel{" "}
-              <a
-                href="https://filecoinproject.slack.com/archives/C02T827T9N0"
-                target="_blank"
-                rel="noreferrer"
-              >
-                #storetheindex.
-              </a>
-            </p>
-            <p>
-              For latest project status, visit our public{" "}
-              <a
-                href="https://www.notion.so/pl-strflt/Weekly-Status-Report-30699cbe5a99473ea98b4ea4f9a3619b"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Notion workspace
-              </a>
-            </p>
-          </Col>
-          <Col xs={4} lg={5} xl={12} className="d-flex d-lg-block align-items-end justify-content-end mb-3">
             <div className="logoWrapper">
               <a href="https://ipfs.io/" target="_blank" rel="noreferrer">
                 <img
@@ -111,8 +105,8 @@ function Footer(props) {
                 />
               </a>
             </div>
-          </Col>
-        </Row>
+          </div>
+        </div>
       </div>
       <FooterBg />
     </footer>
