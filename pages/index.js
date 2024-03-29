@@ -826,13 +826,13 @@ export default function Home(props) {
             <h2>Content Routing for the Distributed Web</h2>
             <p>An Interplanetary Network Indexer built for IPFS and Filecoin</p>
             <div className="dataRow">
-              
-                {/* Hide total indexed CIDs until there is an accurate measure. See:
+
+              {/* Hide total indexed CIDs until there is an accurate measure. See:
                      * https://github.com/ipni/cid.contact/issues/17
                     
                     To show the count again, change `className` to `{totalIndexed ? "dataCol" : "hidden"}`.
                  */}
-                <div className="hidden">
+              <div className="hidden">
                 <div className="innerWrapper">
                   <div className="box">
                     <div className="textWrapper">
@@ -1024,24 +1024,31 @@ export default function Home(props) {
           <section className="about" ref={aboutRef}>
             <div className="container">
               <h3>About CID Contact</h3>
-              <Row>
-                <Col xs={12} md={4} className="imgCol pe-md-5 mb-5 mb-md-0">
-                  <img src="images/about-1.svg" alt="Map" />
-                </Col>
-                <Col xs={12} md={8} className="textCol">
+              <p>
+                A content identifier, or CID, is a label used to point to
+                material in IPFS. However, it doesn't indicate where the content
+                is stored, but it forms a kind of address based on the content
+                itself.
+              </p>
+              <div className="rowWrapper">
+                <Row>
+                  <Col xs={12} md={4} className="imgCol pe-md-5 mb-5 mb-md-0">
+                    <img src="images/about-1.svg" alt="Map" />
+                  </Col>
+                  <Col xs={12} md={8} className="textCol">
                   <p>
                     <strong>Content routing</strong> is the a term used to
                     describe the problem of finding providers for a given piece
                     of content. If you have a hash, or CID of some data, how do
                     you find who has it in the IPFS and Filecoin system?
                   </p>
-                </Col>
-              </Row>
-              <Row>
-                <Col xs={12} md={4} className="imgCol pe-md-5 mb-5 mb-md-0">
-                  <img src="images/about-2.svg" alt="Solarsystem" />
-                </Col>
-                <Col xs={12} md={8} className="textCol">
+                  </Col>
+                </Row>
+                <Row>
+                  <Col xs={12} md={4} className="imgCol pe-md-5 mb-5 mb-md-0">
+                    <img src="images/about-2.svg" alt="Solarsystem" />
+                  </Col>
+                  <Col xs={12} md={8} className="textCol">
                   <p>
                     In IPFS, a <strong>Distributed Hash Table</strong> (DHT) is
                     used as a decentralized answer to content routing. However,
@@ -1051,13 +1058,13 @@ export default function Home(props) {
                     participants. It will take too much bandwidth and storage
                     space to be practical.
                   </p>
-                </Col>
-              </Row>
-              <Row>
-                <Col xs={12} md={4} className="imgCol pe-md-5 mb-5 mb-md-0">
-                  <img src="images/about-3.svg" alt="Connected Circles" />
-                </Col>
-                <Col xs={12} md={8} className="textCol">
+                  </Col>
+                </Row>
+                <Row>
+                  <Col xs={12} md={4} className="imgCol pe-md-5 mb-5 mb-md-0">
+                    <img src="images/about-3.svg" alt="Connected Circles" />
+                  </Col>
+                  <Col xs={12} md={8} className="textCol">
                   <p>
                     CID Contact encompasses a number of work streams to increase
                     the scalability and resilience of content routing.{" "}
@@ -1068,11 +1075,30 @@ export default function Home(props) {
                     be discovered and used safely, efficiently, and in a
                     decentralized manner by clients.
                   </p>
-                </Col>
-              </Row>
-
+                  </Col>
+                </Row>
+              </div>
+              <div className="cidContactWrapper">
+                <p className="cidContact">
+                  Not sure where to start? Use CID Contact to search the
+                  following CID:
+                </p>
+                <div className="inputWrapper">
+                  <input
+                    type="text"
+                    name="queryString"
+                    id="queryString"
+                    value="bafybeigvgzoolc3drupxhlevdp2ugqcrbcsqfmcek2zxiw5wctk3xjpjwy"
+                  />
+                </div>
+                <a
+                  href="https://docs.cid.contact/"
+                  className="btn btn-tertiary"
+                >
+                  Network Indexer Docs
+                </a>
+              </div>
               <h3>Partners</h3>
-
               <Slider {...settings}>
                 <a
                   href="https://kencloud.com/"
