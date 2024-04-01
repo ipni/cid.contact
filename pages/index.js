@@ -6,6 +6,7 @@ import LookupBg from "../svgs/LookupBg.js";
 import { Waypoint } from "react-waypoint";
 import Slider from "react-slick";
 import cbor from "cbor";
+import Image from "next/image";
 
 export default function Home(props) {
   const setPagePos = props.setPagePos;
@@ -1071,7 +1072,7 @@ export default function Home(props) {
               <div className="rowWrapper">
                 <Row>
                   <Col xs={12} md={4} className="imgCol pe-md-5 mb-5 mb-md-0">
-                    <img src="images/about-1.svg" alt="Map" />
+                    <Image src="/images/about-1.svg" alt="Map" width={172} height={120} />
                   </Col>
                   <Col xs={12} md={8} className="textCol">
                     <p>
@@ -1085,7 +1086,7 @@ export default function Home(props) {
                 </Row>
                 <Row>
                   <Col xs={12} md={4} className="imgCol pe-md-5 mb-5 mb-md-0">
-                    <img src="images/about-2.svg" alt="Solarsystem" />
+                    <Image src="/images/about-2.svg" alt="Solarsystem" width={197}  height={120}/>
                   </Col>
                   <Col xs={12} md={8} className="textCol">
                     <p>
@@ -1101,7 +1102,7 @@ export default function Home(props) {
                 </Row>
                 <Row>
                   <Col xs={12} md={4} className="imgCol pe-md-5 mb-5 mb-md-0">
-                    <img src="images/about-3.svg" alt="Connected Circles" />
+                    <Image src="/images/about-3.svg" alt="Connected Circles" width={193}  height={120} />
                   </Col>
                   <Col xs={12} md={8} className="textCol">
                     <p>
@@ -1142,55 +1143,56 @@ export default function Home(props) {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <img src="images/kenLabs.svg" alt="Ken Labs Logo" />
+                  <Image src="/images/kenLabs.svg" alt="Ken Labs Logo" width={322} height={89}/>
                 </a>
                 <a
                   href="https://www.leewayhertz.com/"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <img src="images/LeewayHertz.svg" alt="Leeway Hertz Logo" />
+                  <Image src="/images/LeewayHertz.svg" alt="Leeway Hertz Logo" width={322} height={43} />
                 </a>
                 <a
                   href="https://www.piknik.com/"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <img src="images/PiKNiK.svg" alt="PiKNiK Logo" />
+                  <Image src="/images/PiKNiK.svg" alt="PiKNiK Logo" width={322} height={82}/>
                 </a>
                 <a
                   href="https://www.filswan.com/"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <img src="images/FilSwan-logo.svg" alt="FilSwan Logo" />
+                  <Image src="/images/FilSwan-logo.svg" alt="FilSwan Logo" width={322} height={76}/>
                 </a>
                 <a
                   href="https://www.sxxfuture.com/"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <img
-                    src="images/SanXiaXingFutureData.svg"
+                  <Image
+                    src="/images/SanXiaXingFutureData.svg"
                     alt="San Xia Xing Future Data Logo"
+                    width={322} height={82}
                   />
                 </a>
                 <a href="https://infura.io/" target="_blank" rel="noreferrer">
-                  <img src="images/Infura.svg" alt="Infura Logo" />
+                  <Image src="/images/Infura.svg" alt="Infura Logo" width={322} height={89} />
                 </a>
                 <a
                   href="https://distributedstorage.com/"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <img src="images/dss.svg" alt="DSS Logo" />
+                  <Image src="/images/dss.svg" alt="DSS Logo" width={322} height={112} />
                 </a>
                 <a
                   href="https://www.cloudflare.com/"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <img src="images/Cloudflare.svg" alt="Cloudflare Logo" />
+                  <Image src="/images/Cloudflare.svg" alt="Cloudflare Logo" width={322} height={89} />
                 </a>
               </Slider>
             </div>

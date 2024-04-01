@@ -1,6 +1,7 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
 import FooterBg from "../svgs/FooterBg.js";
+import Image from 'next/image'
 
 function Footer(props) {
   const pagePos = props.pagePos;
@@ -91,17 +92,21 @@ function Footer(props) {
             </nav>
             <div className="logoWrapper">
               <a href="https://ipfs.io/" target="_blank" rel="noreferrer">
-                <img
+                <Image
                   className="logo ipfs"
-                  src="images/IPFS-logo.svg"
+                  src="/images/IPFS-logo.svg"
                   alt="IPFS Logo"
+                  height={30}
+                  width={30}
                 />
               </a>
               <a href="https://filecoin.io/" target="_blank" rel="noreferrer">
-                <img
+                <Image
                   className="logo"
-                  src="images/filecoin-logo.svg"
+                  src="/images/filecoin-logo.svg"
                   alt="Filecoin Logo"
+                  height={30}
+                  width={30}
                 />
               </a>
             </div>

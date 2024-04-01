@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
 
 import {
   disableBodyScroll,
@@ -101,17 +102,21 @@ function Header(props) {
           </div>
           <div className="centerWrapper">
             <a href="https://ipfs.io/" target="_blank" rel="noreferrer">
-              <img
+              <Image
                 className="logo ipfs"
-                src="images/IPFS-logo.svg"
+                src="/images/IPFS-logo.svg"
                 alt="IPFS Logo"
+                height={36}
+                width={36}
               />
             </a>
             <a href="https://filecoin.io/" target="_blank" rel="noreferrer">
-              <img
+              <Image
                 className="logo"
-                src="images/filecoin-logo.svg"
+                src="/images/filecoin-logo.svg"
                 alt="Filecoin Logo"
+                height={36}
+                width={36}
               />
             </a>
           </div>
