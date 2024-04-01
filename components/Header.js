@@ -51,7 +51,7 @@ function Header(props) {
     // trap focus in the burger menu for accessibility purposes
     const firstFocusableEl = burgerWrapper.querySelector('button:not([disabled])')
     const lastFocusableEl = burgerWrapper.querySelector('ul li:last-child a')
-    
+
     burgerWrapper.addEventListener("keydown", e => {
       if (e.key === 'Tab') {
         if (e.shiftKey)  {
@@ -165,8 +165,12 @@ function Header(props) {
         </div>
       </header>
       <nav className="mainMenu device">
-        <button tabIndex="0" className="noStyle navbar-toggle menuActive" onClick={toggleMenu}>
-        </button>
+        <button
+          aria-label="Dropdown menu"
+          tabIndex="0"
+          className="noStyle navbar-toggle menuActive"
+          onClick={toggleMenu}
+        ></button>
         <ul>
           <li>
             <a href="#" onClick={(e) => props.handelCloseScrollTo(e, "home")}>

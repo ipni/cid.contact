@@ -83,14 +83,14 @@
 }
 
 .btn.btn-tertiary {
-  background-color: $blue;
+  background-color: $dkBlue;
   color: $white;
   line-height: normal;
 
   &:hover,
   &:active,
   &:focus {
-    background-color: $dkBlue;
+    background-color: $mdBlue;
   }
 }
 

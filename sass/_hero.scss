@@ -27,6 +27,10 @@
   > p {
     font-size: 0.8rem;
     font-weight: 400;
+
+    a {
+      color: $dkrBlue;
+    }
   }
 
   .dataRow {
@@ -90,7 +94,7 @@
           }
 
           &::before {
-            content: '';
+            content: "";
             position: absolute;
             top: 0;
             left: 0;
@@ -102,7 +106,7 @@
           }
 
           &::after {
-            content: '';
+            content: "";
             position: absolute;
             top: 3px;
             left: 4px;

@@ -763,25 +763,25 @@ export default function Home(props) {
           slidesToShow: 3,
           slidesToScroll: 3,
           infinite: true,
-          dots: true
-        }
+          dots: true,
+        },
       },
       {
         breakpoint: 600,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
-          initialSlide: 2
-        }
+          initialSlide: 2,
+        },
       },
       {
         breakpoint: 480,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }
-    ]
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
 
   return (
@@ -995,7 +995,6 @@ export default function Home(props) {
               <LookupBg />
             </div>
             <div className="dataRow">
-
               {/* Hide total indexed CIDs until there is an accurate measure. See:
                      * https://github.com/ipni/cid.contact/issues/17
                     
@@ -1075,12 +1074,13 @@ export default function Home(props) {
                     <img src="images/about-1.svg" alt="Map" />
                   </Col>
                   <Col xs={12} md={8} className="textCol">
-                  <p>
-                    <strong>Content routing</strong> is the a term used to
-                    describe the problem of finding providers for a given piece
-                    of content. If you have a hash, or CID of some data, how do
-                    you find who has it in the IPFS and Filecoin system?
-                  </p>
+                    <p>
+                      <strong>Content routing</strong> is the a term used to
+                      describe the problem of finding providers for a given
+                      piece of content. If you have a hash, or CID of some data,
+                      how do you find who has it in the IPFS and Filecoin
+                      system?
+                    </p>
                   </Col>
                 </Row>
                 <Row>
@@ -1088,15 +1088,15 @@ export default function Home(props) {
                     <img src="images/about-2.svg" alt="Solarsystem" />
                   </Col>
                   <Col xs={12} md={8} className="textCol">
-                  <p>
-                    In IPFS, a <strong>Distributed Hash Table</strong> (DHT) is
-                    used as a decentralized answer to content routing. However,
-                    when considering the number of records in Filecoin storage
-                    providers, it is clear that simply announcing these records
-                    to the DHT will place an undue burden on current DHT
-                    participants. It will take too much bandwidth and storage
-                    space to be practical.
-                  </p>
+                    <p>
+                      In IPFS, a <strong>Distributed Hash Table</strong> (DHT)
+                      is used as a decentralized answer to content routing.
+                      However, when considering the number of records in
+                      Filecoin storage providers, it is clear that simply
+                      announcing these records to the DHT will place an undue
+                      burden on current DHT participants. It will take too much
+                      bandwidth and storage space to be practical.
+                    </p>
                   </Col>
                 </Row>
                 <Row>
@@ -1104,16 +1104,17 @@ export default function Home(props) {
                     <img src="images/about-3.svg" alt="Connected Circles" />
                   </Col>
                   <Col xs={12} md={8} className="textCol">
-                  <p>
-                    CID Contact encompasses a number of work streams to increase
-                    the scalability and resilience of content routing.{" "}
-                    <strong>Network Indexer</strong> provides aggregated views
-                    of content routing, and harness the heterogeneity of network
-                    resources. <strong>Delegated Content Routing</strong>{" "}
-                    defines protocols for multiple content routing providers to
-                    be discovered and used safely, efficiently, and in a
-                    decentralized manner by clients.
-                  </p>
+                    <p>
+                      CID Contact encompasses a number of work streams to
+                      increase the scalability and resilience of content
+                      routing. <strong>Network Indexer</strong> provides
+                      aggregated views of content routing, and harness the
+                      heterogeneity of network resources.{" "}
+                      <strong>Delegated Content Routing</strong> defines
+                      protocols for multiple content routing providers to be
+                      discovered and used safely, efficiently, and in a
+                      decentralized manner by clients.
+                    </p>
                   </Col>
                 </Row>
               </div>
@@ -1123,12 +1124,9 @@ export default function Home(props) {
                   following CID:
                 </p>
                 <div className="inputWrapper">
-                  <input
-                    type="text"
-                    name="queryString"
-                    id="queryString"
-                    value="bafybeigvgzoolc3drupxhlevdp2ugqcrbcsqfmcek2zxiw5wctk3xjpjwy"
-                  />
+                  <p className="queryString">
+                    bafybeigvgzoolc3drupxhlevdp2ugqcrbcsqfmcek2zxiw5wctk3xjpjwy
+                  </p>
                 </div>
                 <a
                   href="https://docs.cid.contact/"
