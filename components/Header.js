@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 
 import {
@@ -9,8 +9,12 @@ import {
 
 function Header(props) {
   const scrolled = props.scrolled;
-
+  
   const pagePos = props.pagePos;
+
+  const burgerWrapperRef = useRef()
+  const dropdownButtonRef = useRef()
+  const lastItemRef = useRef()
 
   // On Window Resize Store the Windows Width
   const [width, setWidth] = useState(0);
@@ -46,23 +50,19 @@ function Header(props) {
     // var viewportWidth =
     //   window.innerWidth || document.documentElement.clientWidth;
 
-    const burgerWrapper = document.querySelector(".mainMenu.device");
 
-
-    // trap focus in the burger menu for accessibility purposes
-    const firstFocusableEl = burgerWrapper.querySelector('button:not([disabled])')
-    const lastFocusableEl = burgerWrapper.querySelector('ul li:last-child a')
+    const burgerWrapper = burgerWrapperRef.current
 
     burgerWrapper.addEventListener("keydown", e => {
       if (e.key === 'Tab') {
         if (e.shiftKey)  {
-          if (document.activeElement === firstFocusableEl) {
-            lastFocusableEl.focus();
+          if (document.activeElement === dropdownButtonRef.current) {
+            lastItemRef.current.focus();
             e.preventDefault();
           }
         } else {
-          if (document.activeElement === lastFocusableEl) {
-            firstFocusableEl.focus();
+          if (document.activeElement === lastItemRef.current) {
+            dropdownButtonRef.current.focus();
             e.preventDefault();
           }
         }
@@ -169,8 +169,9 @@ function Header(props) {
           </div>
         </div>
       </header>
-      <nav className="mainMenu device">
+      <nav ref={burgerWrapperRef} className="mainMenu device">
         <button
+          ref={dropdownButtonRef}
           aria-label="Dropdown menu"
           tabIndex="0"
           className="noStyle navbar-toggle menuActive"
@@ -198,6 +199,7 @@ function Header(props) {
           </li>
           <li>
             <a
+              ref={lastItemRef}
               href="https://status.cid.contact/"
               target="_blank"
               rel="noreferrer"

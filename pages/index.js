@@ -839,7 +839,7 @@ export default function Home(props) {
               }
             >
               <div className="container">
-                <div className="formRow">
+                <form className="formRow">
                   <div className="selectInputWrapper">
                     <CustomSelect
                       selectedOption={selectedOption}
@@ -891,7 +891,7 @@ export default function Home(props) {
                   >
                     <span>Search</span>
                   </button>
-                </div>
+                </form>
                 {searchError && <p className="errorNotice">{searchError}</p>}
                 {!searchError && displayData && (
                   <div className="accordionWrapper">
