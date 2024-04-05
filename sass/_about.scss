@@ -22,6 +22,9 @@
     align-items: center;
 
     .imgCol {
+      display: flex;
+      justify-content: center;
+
       img {
         display: block;
         height: auto;
