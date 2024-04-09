@@ -839,7 +839,20 @@ export default function Home(props) {
               }
             >
               <div className="container">
-                <form className="formRow">
+                <form 
+                  onSubmit={(e) => {
+                    handelSearch(
+                      e,
+                      queryString,
+                      optionsList,
+                      selectedOption,
+                      displayData,
+                      setDisplayData,
+                      accordionState,
+                      setAccordionState,
+                      setSearchError
+                    )}}
+                    className="formRow">
                   <div className="selectInputWrapper">
                     <CustomSelect
                       selectedOption={selectedOption}
@@ -860,6 +873,7 @@ export default function Home(props) {
                         onKeyUp={(e) => {
                           if (e.code == "Enter") {
                             handelSearch(
+                              e,
                               queryString,
                               optionsList,
                               selectedOption,
@@ -876,18 +890,7 @@ export default function Home(props) {
                   </div>
                   <button
                     className="btn btn-primary btn-sm"
-                    onClick={() =>
-                      handelSearch(
-                        queryString,
-                        optionsList,
-                        selectedOption,
-                        displayData,
-                        setDisplayData,
-                        accordionState,
-                        setAccordionState,
-                        setSearchError
-                      )
-                    }
+                    type="submit"
                   >
                     <span>Search</span>
                   </button>
@@ -1479,6 +1482,7 @@ function base64ToBytesArr(str) {
 }
 
 function handelSearch(
+  event,
   queryString,
   optionsList,
   selectedOption,
@@ -1488,6 +1492,7 @@ function handelSearch(
   setAccordionState,
   setSearchError
 ) {
+  event.preventDefault()
   onSearch(
     queryString,
     optionsList,
