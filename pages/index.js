@@ -7,6 +7,7 @@ import { Waypoint } from "react-waypoint";
 import Slider from "react-slick";
 import cbor from "cbor";
 import Image from "next/image";
+import usePrefersReducedMotion from "../hooks/usePrefersReducedMotion.js";
 
 export default function Home(props) {
   const setPagePos = props.setPagePos;
@@ -749,14 +750,16 @@ export default function Home(props) {
     })();
   }, [totalIndexed, totalIndexerNodes, uptime]);
 
+  const userPrefersReducedMotion = usePrefersReducedMotion();
+
   var settings = {
     dots: true,
     infinite: true,
-    autoplay: true,
-    autoplaySpeed: 2000,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 1,
+    autoplay: userPrefersReducedMotion ? false : true,
+    autoplaySpeed: 3000,
+    speed: 800,
+    slidesToShow: 3,
+    slidesToScroll: 3,
     responsive: [
       {
         breakpoint: 1024,
@@ -770,16 +773,16 @@ export default function Home(props) {
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToShow: 3,
+          slidesToScroll: 3,
           initialSlide: 2,
         },
       },
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
+          slidesToShow: 2,
+          slidesToScroll: 2,
         },
       },
     ],
@@ -1075,7 +1078,12 @@ export default function Home(props) {
               <div className="rowWrapper">
                 <Row>
                   <Col xs={12} md={4} className="imgCol pe-md-5 mb-5 mb-md-0">
-                    <Image src="/images/about-1.svg" alt="Map" width={172} height={120} />
+                    <Image
+                      src="/images/about-1.svg"
+                      alt="Map"
+                      width={172}
+                      height={120}
+                    />
                   </Col>
                   <Col xs={12} md={8} className="textCol">
                     <p>
@@ -1089,7 +1097,12 @@ export default function Home(props) {
                 </Row>
                 <Row>
                   <Col xs={12} md={4} className="imgCol pe-md-5 mb-5 mb-md-0">
-                    <Image src="/images/about-2.svg" alt="Solarsystem" width={197}  height={120}/>
+                    <Image
+                      src="/images/about-2.svg"
+                      alt="Solarsystem"
+                      width={197}
+                      height={120}
+                    />
                   </Col>
                   <Col xs={12} md={8} className="textCol">
                     <p>
@@ -1105,7 +1118,12 @@ export default function Home(props) {
                 </Row>
                 <Row>
                   <Col xs={12} md={4} className="imgCol pe-md-5 mb-5 mb-md-0">
-                    <Image src="/images/about-3.svg" alt="Connected Circles" width={193}  height={120} />
+                    <Image
+                      src="/images/about-3.svg"
+                      alt="Connected Circles"
+                      width={193}
+                      height={120}
+                    />
                   </Col>
                   <Col xs={12} md={8} className="textCol">
                     <p>
@@ -1146,28 +1164,48 @@ export default function Home(props) {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <Image src="/images/kenLabs.svg" alt="Ken Labs Logo" width={322} height={89}/>
+                  <Image
+                    src="/images/kenLabs.svg"
+                    alt="Ken Labs Logo"
+                    width={322}
+                    height={89}
+                  />
                 </a>
                 <a
                   href="https://www.leewayhertz.com/"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <Image src="/images/LeewayHertz.svg" alt="Leeway Hertz Logo" width={322} height={43} />
+                  <Image
+                    src="/images/LeewayHertz.svg"
+                    alt="Leeway Hertz Logo"
+                    width={322}
+                    height={43}
+                  />
                 </a>
                 <a
                   href="https://www.piknik.com/"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <Image src="/images/PiKNiK.svg" alt="PiKNiK Logo" width={322} height={82}/>
+                  <Image
+                    src="/images/PiKNiK.svg"
+                    alt="PiKNiK Logo"
+                    width={322}
+                    height={82}
+                  />
                 </a>
                 <a
                   href="https://www.filswan.com/"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <Image src="/images/FilSwan-logo.svg" alt="FilSwan Logo" width={322} height={76}/>
+                  <Image
+                    src="/images/FilSwan-logo.svg"
+                    alt="FilSwan Logo"
+                    width={322}
+                    height={76}
+                  />
                 </a>
                 <a
                   href="https://www.sxxfuture.com/"
@@ -1177,25 +1215,41 @@ export default function Home(props) {
                   <Image
                     src="/images/SanXiaXingFutureData.svg"
                     alt="San Xia Xing Future Data Logo"
-                    width={322} height={82}
+                    width={322}
+                    height={82}
                   />
                 </a>
                 <a href="https://infura.io/" target="_blank" rel="noreferrer">
-                  <Image src="/images/Infura.svg" alt="Infura Logo" width={322} height={89} />
+                  <Image
+                    src="/images/Infura.svg"
+                    alt="Infura Logo"
+                    width={322}
+                    height={89}
+                  />
                 </a>
                 <a
                   href="https://distributedstorage.com/"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <Image src="/images/dss.svg" alt="DSS Logo" width={322} height={112} />
+                  <Image
+                    src="/images/dss.svg"
+                    alt="DSS Logo"
+                    width={322}
+                    height={112}
+                  />
                 </a>
                 <a
                   href="https://www.cloudflare.com/"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <Image src="/images/Cloudflare.svg" alt="Cloudflare Logo" width={322} height={89} />
+                  <Image
+                    src="/images/Cloudflare.svg"
+                    alt="Cloudflare Logo"
+                    width={322}
+                    height={89}
+                  />
                 </a>
               </Slider>
             </div>
