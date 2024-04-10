@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 import {
   disableBodyScroll,
@@ -98,7 +99,11 @@ function Header(props) {
       >
         <div className="container">
           <div className="leftWrapper">
-            <h1>CID Contact</h1>
+            <Link href="/">
+              <a aria-label="CID Contact">
+               CID Contact
+              </a>
+            </Link>
           </div>
           <div className="centerWrapper">
             <a href="https://ipfs.io/" target="_blank" rel="noreferrer">
@@ -123,15 +128,6 @@ function Header(props) {
           <div className="rightWrapper">
             <nav className="mainMenu desktop">
               <ul>
-                <li>
-                  <a
-                    href="#"
-                    className={pagePos == "home" ? "active" : undefined}
-                    onClick={(e) => props.handelScrollTo(e, "home")}
-                  >
-                    Home
-                  </a>
-                </li>
                 <li>
                   <a
                     href="#"
@@ -178,11 +174,6 @@ function Header(props) {
           onClick={toggleMenu}
         ></button>
         <ul>
-          <li>
-            <a href="#" onClick={(e) => props.handelCloseScrollTo(e, "home")}>
-              Home
-            </a>
-          </li>
           <li>
             <a href="#" onClick={(e) => props.handelCloseScrollTo(e, "about")}>
               About
