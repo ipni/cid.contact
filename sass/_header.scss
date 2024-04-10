@@ -42,17 +42,18 @@
       cursor: pointer;
       text-decoration: none;
       color: $black;
-    }
-
-    h1 {
+      transition: color 0.2s ease;
+      font-size: 1.2rem;
       font-weight: 600;
-      margin: 0;
-      font-size: 18px;
       text-wrap: nowrap;
-      line-height: 0;
+
+      &:hover {
+        color: $blue;
+        transition: color 0.2s ease;
+      }
 
       @include media-breakpoint-up(lg) {
-        font-size: 25px;
+        font-size: 1.5rem;
       }
     }
   }

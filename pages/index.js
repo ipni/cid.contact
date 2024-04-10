@@ -827,7 +827,7 @@ export default function Home(props) {
           //onLeave={() => handelHomeLeave(setPagePos)}
         >
           <section className="hero" ref={homeRef}>
-            <h2>Content Discovery & Routing for the Distributed Web</h2>
+            <h1>Content Discovery & Routing for the Distributed Web</h1>
             <p>
               CID Contact is an Interplanetary Network Indexer built for IPFS
               and Filecoin. <br />
