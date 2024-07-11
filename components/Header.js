@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import Image from "next/image";
+import Link from "next/link";
 
 import {
   disableBodyScroll,
@@ -8,8 +10,12 @@ import {
 
 function Header(props) {
   const scrolled = props.scrolled;
-
+  
   const pagePos = props.pagePos;
+
+  const burgerWrapperRef = useRef()
+  const dropdownButtonRef = useRef()
+  const lastItemRef = useRef()
 
   // On Window Resize Store the Windows Width
   const [width, setWidth] = useState(0);
@@ -44,7 +50,25 @@ function Header(props) {
   function toggleMenu() {
     // var viewportWidth =
     //   window.innerWidth || document.documentElement.clientWidth;
-    const burgerWrapper = document.querySelector(".mainMenu.device");
+
+
+    const burgerWrapper = burgerWrapperRef.current
+
+    burgerWrapper.addEventListener("keydown", e => {
+      if (e.key === 'Tab') {
+        if (e.shiftKey)  {
+          if (document.activeElement === dropdownButtonRef.current) {
+            lastItemRef.current.focus();
+            e.preventDefault();
+          }
+        } else {
+          if (document.activeElement === lastItemRef.current) {
+            dropdownButtonRef.current.focus();
+            e.preventDefault();
+          }
+        }
+      }
+    });
 
     // if (viewportWidth <= 991) {
     if (burgerWrapper.classList.contains("menuActive")) {
@@ -75,36 +99,35 @@ function Header(props) {
       >
         <div className="container">
           <div className="leftWrapper">
-            <h1>CID Contact</h1>
+            <Link href="/">
+              <a aria-label="CID Contact">
+               CID Contact
+              </a>
+            </Link>
           </div>
           <div className="centerWrapper">
             <a href="https://ipfs.io/" target="_blank" rel="noreferrer">
-              <img
+              <Image
                 className="logo ipfs"
-                src="images/IPFS-logo.svg"
+                src="/images/IPFS-logo.svg"
                 alt="IPFS Logo"
+                height={36}
+                width={36}
               />
             </a>
             <a href="https://filecoin.io/" target="_blank" rel="noreferrer">
-              <img
+              <Image
                 className="logo"
-                src="images/filecoin-logo.svg"
+                src="/images/filecoin-logo.svg"
                 alt="Filecoin Logo"
+                height={36}
+                width={36}
               />
             </a>
           </div>
           <div className="rightWrapper">
             <nav className="mainMenu desktop">
               <ul>
-                <li>
-                  <a
-                    href="#"
-                    className={pagePos == "home" ? "active" : undefined}
-                    onClick={(e) => props.handelScrollTo(e, "home")}
-                  >
-                    Home
-                  </a>
-                </li>
                 <li>
                   <a
                     href="#"
@@ -137,80 +160,20 @@ function Header(props) {
 
             <button className="noStyle navbar-toggle" onClick={toggleMenu}>
               <span className="visually-hidden">Toggle Navigation</span>
-              <span className="icon-bar">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  x="0"
-                  y="0"
-                  viewBox="0 0 16 2.3"
-                >
-                  <path d="M0 1.1C0 .8.1.5.3.3s.5-.3.8-.3h13.7c.3 0 .6.1.8.3.3.2.4.5.4.8 0 .3-.1.6-.3.8-.2.2-.5.3-.8.3H1.1c-.3.1-.6 0-.8-.2-.2-.3-.3-.6-.3-.9z"></path>
-                </svg>
-              </span>
-              <span className="icon-bar">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  x="0"
-                  y="0"
-                  viewBox="0 0 16 2.3"
-                >
-                  <path d="M0 1.1C0 .8.1.5.3.3s.5-.3.8-.3h13.7c.3 0 .6.1.8.3.3.2.4.5.4.8 0 .3-.1.6-.3.8-.2.2-.5.3-.8.3H1.1c-.3.1-.6 0-.8-.2-.2-.3-.3-.6-.3-.9z"></path>
-                </svg>
-              </span>
-              <span className="icon-bar">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  x="0"
-                  y="0"
-                  viewBox="0 0 16 2.3"
-                >
-                  <path d="M0 1.1C0 .8.1.5.3.3s.5-.3.8-.3h13.7c.3 0 .6.1.8.3.3.2.4.5.4.8 0 .3-.1.6-.3.8-.2.2-.5.3-.8.3H1.1c-.3.1-.6 0-.8-.2-.2-.3-.3-.6-.3-.9z"></path>
-                </svg>
-              </span>
+              <div className="hamburger"></div>
             </button>
           </div>
         </div>
       </header>
-      <nav className="mainMenu device">
-        <button className="noStyle navbar-toggle menuActive" onClick={toggleMenu}>
-          <span className="visually-hidden">Toggle Navigation</span>
-          <span className="icon-bar">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              x="0"
-              y="0"
-              viewBox="0 0 16 2.3"
-            >
-              <path d="M0 1.1C0 .8.1.5.3.3s.5-.3.8-.3h13.7c.3 0 .6.1.8.3.3.2.4.5.4.8 0 .3-.1.6-.3.8-.2.2-.5.3-.8.3H1.1c-.3.1-.6 0-.8-.2-.2-.3-.3-.6-.3-.9z"></path>
-            </svg>
-          </span>
-          <span className="icon-bar">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              x="0"
-              y="0"
-              viewBox="0 0 16 2.3"
-            >
-              <path d="M0 1.1C0 .8.1.5.3.3s.5-.3.8-.3h13.7c.3 0 .6.1.8.3.3.2.4.5.4.8 0 .3-.1.6-.3.8-.2.2-.5.3-.8.3H1.1c-.3.1-.6 0-.8-.2-.2-.3-.3-.6-.3-.9z"></path>
-            </svg>
-          </span>
-          <span className="icon-bar">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              x="0"
-              y="0"
-              viewBox="0 0 16 2.3"
-            >
-              <path d="M0 1.1C0 .8.1.5.3.3s.5-.3.8-.3h13.7c.3 0 .6.1.8.3.3.2.4.5.4.8 0 .3-.1.6-.3.8-.2.2-.5.3-.8.3H1.1c-.3.1-.6 0-.8-.2-.2-.3-.3-.6-.3-.9z"></path>
-            </svg>
-          </span>
-        </button>
+      <nav ref={burgerWrapperRef} className="mainMenu device">
+        <button
+          ref={dropdownButtonRef}
+          aria-label="Dropdown menu"
+          tabIndex="0"
+          className="noStyle navbar-toggle menuActive"
+          onClick={toggleMenu}
+        ></button>
         <ul>
-          <li>
-            <a href="#" onClick={(e) => props.handelCloseScrollTo(e, "home")}>
-              Home
-            </a>
-          </li>
           <li>
             <a href="#" onClick={(e) => props.handelCloseScrollTo(e, "about")}>
               About
@@ -227,6 +190,7 @@ function Header(props) {
           </li>
           <li>
             <a
+              ref={lastItemRef}
               href="https://status.cid.contact/"
               target="_blank"
               rel="noreferrer"

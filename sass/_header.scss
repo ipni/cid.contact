@@ -4,15 +4,15 @@
   left: 0;
   width: 100%;
   z-index: 998;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  height: 4rem;
+  display: flex;
   background-color: transparent;
-  //border: 1px solid transparent;
+  // border: 1px solid transparent;
   transition: padding-top 0.4s ease, background-color 0.4s ease;
 
   @include media-breakpoint-up(lg) {
-    padding-top: 25px;
-    padding-bottom: 25px;
+    height: 6rem;
+    padding-block: 1rem;
   }
 
   &[data-menu-active="true"] {
@@ -20,15 +20,7 @@
       background-color: transparent;
       transition: none;
     }
-    @include media-breakpoint-down(lg) {
-      //padding-top: 0;
-    }
 
-    .navbar-toggle {
-      @include media-breakpoint-down(lg) {
-       // padding-top: 25px;
-      }
-    }
   }
 
   &.scrolled{
@@ -36,46 +28,41 @@
   }
 
   .container {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
   }
 
   .leftWrapper {
+    height: 100%;
     display: flex;
     justify-content: flex-start;
     align-items: center;
 
-    h1 {
+    a {
+      cursor: pointer;
+      text-decoration: none;
+      color: $black;
+      transition: color 0.2s ease;
+      font-size: 1.2rem;
       font-weight: 600;
-      margin: 0;
-      font-size: 18px;
+      text-wrap: nowrap;
+
+      &:hover {
+        color: $blue;
+        transition: color 0.2s ease;
+      }
 
       @include media-breakpoint-up(lg) {
-        font-size: 25px;
+        font-size: 1.5rem;
       }
     }
   }
 
   .centerWrapper {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     align-items: center;
-    justify-content: space-between;
-
-    @media (min-width: 400px){
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    @include media-breakpoint-up(lg) {
-      position: static;
-      margin-left: 168px;
-      left: auto;
-      transform: none;
-    }
-
+    gap: 2px;
 
     .logo {
       width: 33px;
@@ -109,6 +96,7 @@
   }
 
   .rightWrapper {
+    height: 100%;
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -131,16 +119,14 @@
 
   ul {
     list-style: none;
-    margin: 0 -22px;
-    padding: 0;
+    margin: 0;
 
     li {
       margin: 0;
-      padding: 0 0 22px 0;
+      padding-right: 1.5rem;
       display: block;
 
       @include media-breakpoint-up(lg) {
-        padding: 0 22px;
         display: inline-block;
       }
 
@@ -150,7 +136,7 @@
         font-weight: 400;
         text-decoration: none;
         color: $black;
-        transition: color 0.4s ease;
+        transition: color 0.2s ease;
         position: relative;
 
         &::after {
@@ -180,6 +166,10 @@
         }
       }
     }
+
+    li:last-child {
+      padding-right: 0;
+    }
   }
 }
 
@@ -196,115 +186,134 @@
   background: $white;
   transition: right 0.5s ease;
   z-index: 998;
+  box-shadow: 1px 2px 3px hsl(0deg 0% 0% / 0.5);
 
   &.menuActive {
     right: 0;
+    display: grid;
+    grid-template-rows: 4rem auto;
+    
+    > *:first-child {
+      right: 0.7rem;
+    }
+
+    li a::after {
+      display: none;
+    }
+
+    li:hover,
+    li:focus-within {
+      cursor: pointer;
+    }
+
+    li:focus-within a {
+      color: $blue;
+      outline: none;
+    }
+ 
+    button {
+      position: relative;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 4px;
+      cursor: pointer;
+      align-self: center;
+      justify-self: end;
+      transform: rotate(45deg);
+      transition: color 0.2s ease;
+
+      &:hover, &:active, &:focus {
+        color: $blue;
+        transition: color 0.2s ease;
+      }
+
+      &:before, &:after {
+        position: absolute;
+        width: 1.8rem;
+        height: 0.2rem;
+        transition: inherit;
+        content: '';   
+        border-radius: inherit; 
+      }
+ 
+      &:before {
+        transform-origin: 100% 50%;
+        background: currentcolor;
+        transform: translate(-50%, -50%);
+      }
+
+      &:after {
+        background: currentcolor;
+        transform: translateX(-50%) translateY(-50%) rotate(90deg);        
+      }
+    }
   }
 
   @include media-breakpoint-up(lg) {
     display: none;
   }
 
-  .navbar-toggle{
-    float: right;
-    padding-top: 24px;
-    padding-right: 24px;
-    margin-right: auto;
-  }
-
   ul {
     width: 100%;
-    margin-left: 70px;
-    margin-top: 80px;
+    padding: 0;
 
-    li{
-      padding: 0;
+    li {
+      padding-left: 1rem;
       border-bottom: 1px solid $dkGrey;
+      text-align: left;
 
-      a{
+      a {
         display: block;
         padding: 25px 0;
         font-size: 16px;
         font-weight: 500;
       }
     }
+
+    li:hover, li:focus-within {
+      cursor: pointer;
+    }
   }
 }
 
-.navbar-toggle {
-  position: relative;
-  margin-right: 24px;
-  margin-left: 4px;
-  padding: 2px 2px 4px 0px;
-  transform: translateY(0.9px);
-  z-index: 9997;
+button.navbar-toggle {
+  height: 100%;
+  color: $black;
+  transition: color 0.2s ease;
 
-  @include media-breakpoint-up(sm) {
-    margin-left: 24px;
+  &:hover > * {
+    color: $blue;
+    transition: color 0.2s ease;
+  }
+
+  .hamburger {
+    width: 1.8rem;
+    height: 0.2rem;
+    border-radius: 4px;
+    background: currentColor;
+    position: relative;
+    
+    &:before, &:after {
+      content: '';
+      position: absolute;
+      width: inherit;
+      height: inherit;
+      border-radius: inherit;
+      height: 99%; // small hack to fix Firefox bug
+    }
+  }
+  
+  .hamburger:before {
+    background: currentColor;
+    transform: translate(-50%, 240%);
+  }
+
+  .hamburger:after {
+    transform: translate(-50%, -240%);
+    background: currentColor;
   }
 
   @include media-breakpoint-up(lg) {
     display: none;
-  }
-
-  .icon-bar {
-    display: block;
-    width: 16px;
-    height: 3px;
-    margin: 0 auto;
-    position: relative;
-    transition: all 250ms ease-in-out;
-    cursor: pointer;
-
-    svg {
-      width: 28px;
-      height: auto;
-      display: block;
-      opacity: 1;
-      margin: 0;
-      fill: $black;
-      transition: fill 0.4s ease;
-    }
-  }
-  .icon-bar + .icon-bar {
-    margin-top: 3px;
-  }
-  .icon-bar:nth-of-type(2) {
-    z-index: 2;
-  }
-  .icon-bar:nth-of-type(3) {
-    top: 1px;
-  }
-  .icon-bar:nth-of-type(4) {
-    top: 2px;
-  }
-  &.menuActive {
-    // margin-right: 6px;
-
-    // &.marginFix {
-    //   margin-right: 13px;
-    // }
-
-    .icon-bar:nth-of-type(2) {
-      top: 0px;
-      transform: rotate(45deg);
-    }
-    .icon-bar:nth-of-type(3) {
-      svg {
-        opacity: 0;
-      }
-    }
-    .icon-bar:nth-of-type(4) {
-      top: -4px;
-      transform: rotate(-45deg);
-    }
-  }
-
-  &:hover {
-    .icon-bar {
-      svg {
-        fill: $blue;
-      }
-    }
   }
 }
