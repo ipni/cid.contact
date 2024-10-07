@@ -1432,20 +1432,18 @@ function onSearch(
         let deals = [];
 
         // Extract protocols and deal information
-        while (mdBytes.length > 0) {
+        if (mdBytes.length > 0) {
           let next = popProtocol(mdBytes);
           let name = next[0];
           mdBytes = next[1];
-
-          if (name !== -1) {
+        
+          if (name !== -1 && name !== null) {
             let ctx = toContext(name, mdBytes);
             if (ctx[0] != "") {
               deals.push(ctx[0]);
             }
             mdBytes = ctx[1];
             protocols.push(name);
-          } else {
-            break;
           }
         }
 
@@ -1475,26 +1473,27 @@ function popProtocol(buf) {
     let [code, Vlen] = readVarint(buf, 0);
     buf = buf.slice(Vlen);
 
-    // Map of protocol codes to protocol names
+    // Map of protocol codes to protocol names (using decimal keys)
     const protocolMap = {
-      0x0900: "Bitswap",                  // 2304
-      0x0910: "Graphsync",     // 2320
-      0x0920: "HTTP",        // 2336
+      2304: "Bitswap",    // 0x0900
+      2320: "Graphsync",  // 0x0910
+      2336: "HTTP",       // 0x0920
     };
 
-    // Convert code to hexadecimal for mapping
-    const hexCode = code.toString(16).toLowerCase();
-    const protocolName = protocolMap[`0x${hexCode}`];
+    const protocolName = protocolMap[code];
 
     if (protocolName) {
       return [protocolName, buf];
     } else {
+      // Optionally, handle unknown codes
+      console.warn(`Unknown protocol code: ${code}`);
       return [code, buf];
     }
   } catch (e) {
     return [-1, buf];
   }
 }
+
 
 function toContext(code, buf) {
   if (code == "Graphsync") {
@@ -1510,9 +1509,9 @@ function toContext(code, buf) {
       if (cborData.FastRetrieval) {
         str += " (Unsealed copy available)";
       }
-      return [str, Uint8Array.from([])];
+      return [str, Uint8Array.from([])]; // Empty buffer after processing
     } catch (e) {
-      return ["Non-CBOR Context:" + e, buf];
+      return ["Non-CBOR Context: " + e.message, buf];
     }
   }
   return ["", buf];
