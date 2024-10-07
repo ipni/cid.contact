@@ -1432,20 +1432,18 @@ function onSearch(
         let deals = [];
 
         // Extract protocols and deal information
-        while (mdBytes.length > 0) {
+        if (mdBytes.length > 0) {
           let next = popProtocol(mdBytes);
           let name = next[0];
           mdBytes = next[1];
-
-          if (name !== -1) {
+        
+          if (name !== -1 && name !== null) {
             let ctx = toContext(name, mdBytes);
             if (ctx[0] != "") {
               deals.push(ctx[0]);
             }
             mdBytes = ctx[1];
             protocols.push(name);
-          } else {
-            break;
           }
         }
 
@@ -1510,9 +1508,9 @@ function toContext(code, buf) {
       if (cborData.FastRetrieval) {
         str += " (Unsealed copy available)";
       }
-      return [str, Uint8Array.from([])];
+      return [str, Uint8Array.from([])]; // Empty buffer after processing
     } catch (e) {
-      return ["Non-CBOR Context:" + e, buf];
+      return ["Non-CBOR Context: " + e.message, buf];
     }
   }
   return ["", buf];
