@@ -1475,9 +1475,9 @@ function popProtocol(buf) {
 
     // Map of protocol codes to protocol names
     const protocolMap = {
-      0x0900: "Bitswap",                  // 2304
-      0x0910: "Graphsync",     // 2320
-      0x0920: "HTTP",        // 2336
+      2304: "Bitswap",    // 0x0900
+      2320: "Graphsync",  // 0x0910
+      2336: "HTTP",       // 0x0920
     };
 
     // Convert code to hexadecimal for mapping
