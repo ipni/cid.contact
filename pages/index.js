@@ -1473,26 +1473,27 @@ function popProtocol(buf) {
     let [code, Vlen] = readVarint(buf, 0);
     buf = buf.slice(Vlen);
 
-    // Map of protocol codes to protocol names
+    // Map of protocol codes to protocol names (using decimal keys)
     const protocolMap = {
       2304: "Bitswap",    // 0x0900
       2320: "Graphsync",  // 0x0910
       2336: "HTTP",       // 0x0920
     };
 
-    // Convert code to hexadecimal for mapping
-    const hexCode = code.toString(16).toLowerCase();
-    const protocolName = protocolMap[`0x${hexCode}`];
+    const protocolName = protocolMap[code];
 
     if (protocolName) {
       return [protocolName, buf];
     } else {
+      // Optionally, handle unknown codes
+      console.warn(`Unknown protocol code: ${code}`);
       return [code, buf];
     }
   } catch (e) {
     return [-1, buf];
   }
 }
+
 
 function toContext(code, buf) {
   if (code == "Graphsync") {
