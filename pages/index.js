@@ -836,6 +836,16 @@ export default function Home(props) {
                 <strong>learn more.</strong>
               </a>
             </p>
+            <div className="banner">
+              <h4>Service degradation</h4>
+              <p>
+                Service is degraded as a large compaction debt from continued high reads has led to the database being stuck. We are in the process of restoring service via our alternate instances.{" "}
+                <br />
+                <span className="date">April 21, 2025</span>
+                <br />
+                <a href="https://status.cid.contact/" target="_blank" rel="noopener noreferrer">See status page for updates</a>
+              </p>
+            </div>
             <div
               className={
                 accordionState && !searchError ? "results active" : "results"
