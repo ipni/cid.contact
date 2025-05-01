@@ -839,7 +839,7 @@ export default function Home(props) {
             <div className="banner">
               <h4>Service degradation</h4>
               <p>
-                Service is degraded as a large compaction debt from continued high reads has led to the database being stuck. We are in the process of restoring service via our alternate instances.{" "}
+                Service is currently degraded due to a large compaction debt on the primary database due to changing and increasing usage. We are in the process of restoring service via our alternate instances.
                 <br />
                 <span className="date">April 21, 2025</span>
                 <br />
