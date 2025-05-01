@@ -974,10 +974,10 @@ export default function Home(props) {
                           <div className="resultItem" key={resultIndex}>
                             <dl>
                               <dt>Peer Id:</dt>
-                              <dd>{dataResult.Provider.ID}</dd>
+                              <dd>{dataResult.PeerId}</dd>
 
                               <dt>MultiAddress:</dt>
-                              <dd>{dataResult.Provider.Addrs}</dd>
+                              <dd>{dataResult.MultiAddress}</dd>
 
                               {dataResult.Protocol && (
                                 <>
@@ -1432,58 +1432,45 @@ function onSearch(
       const res = data.MultihashResults[0];
       const provResults = res.ProviderResults;
 
-      let providers = {};
-      for (let i = 0; i < res.ProviderResults.length; i++) {
-        let provider = res.ProviderResults[i];
-        if (providers[provider.Provider.ID] == undefined) {
-          providers[provider.Provider.ID] = {};
-        }
-        providers[provider.Provider.ID][provider.ContextID] = provider;
-      }
-      const pids = Object.keys(providers);
-
       let toDisplay = [];
 
-      for (let i = 0; i < pids.length; i++) {
-        let pd = providers[pids[i]];
-        let addrs = "";
-        let keys = {};
-        let contexts = Object.keys(pd);
-        for (let j = 0; j < contexts.length; j++) {
-          let mdBytes = base64ToBytesArr(pd[contexts[j]].Metadata);
-          while (mdBytes.length > 0) {
-            let next = popProtocol(mdBytes);
-            let name = next[0];
-            mdBytes = next[1];
+      // Process each ProviderResult individually
+      for (let i = 0; i < provResults.length; i++) {
+        let providerResult = provResults[i];
+        let mdBytes = base64ToBytesArr(providerResult.Metadata);
+        let protocols = [];
+        let deals = [];
+
+        // Extract protocols and deal information
+        if (mdBytes.length > 0) {
+          let next = popProtocol(mdBytes);
+          let name = next[0];
+          mdBytes = next[1];
+        
+          if (name !== -1 && name !== null) {
             let ctx = toContext(name, mdBytes);
-            if (keys[name] == undefined) {
-              keys[name] = [];
-            }
             if (ctx[0] != "") {
-              keys[name].push(ctx[0]);
+              deals.push(ctx[0]);
             }
             mdBytes = ctx[1];
-            addrs = pd[contexts[j]].Provider.Addrs;
-            if (name == -1) {
-              break;
-            }
+            protocols.push(name);
           }
         }
 
-        for (const [index, value] of Object.keys(keys).entries()) {
-          let displayEntry = { ...provResults[i] };
-          displayEntry["Protocol"] = value;
+        // Build the display entry with correct Provider.Addrs
+        let displayEntry = {
+          PeerId: providerResult.Provider.ID,
+          MultiAddress: providerResult.Provider.Addrs.join(", "),
+          Protocol: protocols.join(", "),
+        };
 
-          const deals = [];
-          for (const [dealIndex, dealValue] of keys[value].entries()) {
-            deals.push(dealValue);
-          }
-          if (deals.length) {
-            displayEntry["DealInfo"] = deals;
-          }
-          toDisplay.push(displayEntry);
+        if (deals.length > 0) {
+          displayEntry["DealInfo"] = deals;
         }
+
+        toDisplay.push(displayEntry);
       }
+
       setDisplayData(toDisplay);
     })
     .catch((error) => {
@@ -1495,17 +1482,29 @@ function popProtocol(buf) {
   try {
     let [code, Vlen] = readVarint(buf, 0);
     buf = buf.slice(Vlen);
-    if (code == 0x900) {
-      return ["Bitswap", buf];
-    } else if (code == 0x910 || code == 4128768) {
-      return ["Graphsync", buf];
+
+    // Map of protocol codes to protocol names (using decimal keys)
+    const protocolMap = {
+      2304: "Bitswap",    // 0x0900
+      2320: "Graphsync",  // 0x0910
+      2336: "HTTP",       // 0x0920
+    };
+
+    const protocolName = protocolMap[code];
+
+    if (protocolName) {
+      return [protocolName, buf];
     } else {
+      // Optionally, handle unknown codes
+      console.warn(`Unknown protocol code: ${code}`);
       return [code, buf];
     }
   } catch (e) {
     return [-1, buf];
   }
 }
+
+
 function toContext(code, buf) {
   if (code == "Graphsync") {
     try {
@@ -1520,9 +1519,9 @@ function toContext(code, buf) {
       if (cborData.FastRetrieval) {
         str += " (Unsealed copy available)";
       }
-      return [str, Uint8Array.from([])];
+      return [str, Uint8Array.from([])]; // Empty buffer after processing
     } catch (e) {
-      return ["Non-CBOR Context:" + e, buf];
+      return ["Non-CBOR Context: " + e.message, buf];
     }
   }
   return ["", buf];
