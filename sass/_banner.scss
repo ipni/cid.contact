@@ -1,0 +1,39 @@
+.banner {
+  background-color: #fff3cd;
+  border: 1px solid #ffeeba;
+  border-radius: 4px;
+  padding: 15px;
+  margin-bottom: 20px;
+  color: #856404;
+  max-width: 550px;
+  margin: 0 auto;
+
+  p {
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  h4 {
+    color: #5d4601;
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+  }
+
+  .date {
+    font-size: 0.9rem;
+    font-style: italic;
+    margin: 8px 0;
+    display: inline-block;
+  }
+
+  a {
+    color: #5d4601;
+    text-decoration: underline;
+    font-weight: 500;
+
+    &:hover {
+      color: #856404;
+    }
+  }
+}
