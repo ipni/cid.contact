@@ -1419,11 +1419,13 @@ function onSearch(
   fetch(`${joinPath(endpoint, "cid")}/${sb}`)
     .then((response) => {
       if (response.status >= 200 && response.status <= 299) {
-        return response.json();
+        return response.json(); 
       } else if (response.status == 404) {
         throw "No results for this query";
-      } else if (response.status == 400) {
+      } else if (response.status >= 400 && response.status < 500) {
         throw "Bad request - check that the CID is correct";
+      } else if (response.status >= 500) {
+        throw "Server error - please try again later";
       } else {
         throw response.statusText;
       }
@@ -1474,7 +1476,8 @@ function onSearch(
       setDisplayData(toDisplay);
     })
     .catch((error) => {
-      setSearchError(error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      setSearchError(errorMessage);
     });
 }
 
