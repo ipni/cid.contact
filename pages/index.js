@@ -836,6 +836,7 @@ export default function Home(props) {
                 <strong>learn more.</strong>
               </a>
             </p>
+            {/*
             <div className="banner">
               <h4>Service degradation</h4>
               <p>
@@ -846,6 +847,7 @@ export default function Home(props) {
                 <a href="https://status.cid.contact/" target="_blank" rel="noopener noreferrer">See status page for updates</a>
               </p>
             </div>
+            */}
             <div
               className={
                 accordionState && !searchError ? "results active" : "results"
