@@ -137,7 +137,7 @@ function Header(props) {
                     About
                   </a>
                 </li>
-                <li>
+                {/* <li>
                   <a
                     href="https://docs.cid.contact/"
                     target="_blank"
@@ -145,7 +145,7 @@ function Header(props) {
                   >
                     Docs
                   </a>
-                </li>
+                </li> */}
                 <li>
                   <a
                     href="https://status.cid.contact/"
@@ -179,7 +179,7 @@ function Header(props) {
               About
             </a>
           </li>
-          <li>
+          {/* <li>
             <a
               href="https://docs.cid.contact/"
               target="_blank"
@@ -187,7 +187,7 @@ function Header(props) {
             >
               Docs
             </a>
-          </li>
+          </li> */}
           <li>
             <a
               ref={lastItemRef}
