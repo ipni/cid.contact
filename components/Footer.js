@@ -52,7 +52,7 @@ function Footer(props) {
                     About
                   </a>
                 </li>
-                <li>
+                {/* <li>
                   <a
                     href="https://docs.cid.contact/"
                     target="_blank"
@@ -60,7 +60,7 @@ function Footer(props) {
                   >
                     Docs
                   </a>
-                </li>
+                </li> */}
                 <li>
                   <a
                     href="https://filecoinproject.slack.com/archives/C02T827T9N0"

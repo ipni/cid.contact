@@ -1162,12 +1162,12 @@ export default function Home(props) {
                     bafybeigvgzoolc3drupxhlevdp2ugqcrbcsqfmcek2zxiw5wctk3xjpjwy
                   </p>
                 </div>
-                <a
+                {/* <a
                   href="https://docs.cid.contact/"
                   className="btn btn-tertiary"
                 >
                   Network Indexer Docs
-                </a>
+                </a> */}
               </div>
               <h3>Partners</h3>
               <Slider {...settings}>
